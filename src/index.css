@@ -1,0 +1,46 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-display: "Space Grotesk", sans-serif;
+  --font-body: "Inter", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+
+  --color-ink: #0a0f1c;
+  --color-panel: #10182b;
+  --color-panel-2: #141f38;
+  --color-line: #22304f;
+  --color-text: #e7eaf3;
+  --color-muted: #8a94ac;
+  --color-cyan: #4fd8c9;
+  --color-amber: #f5a83c;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-ink);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  background-image:
+    radial-gradient(ellipse 80% 50% at 50% -10%, rgba(79, 216, 201, 0.08), transparent),
+    linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+  background-size: 100% 100%, 48px 48px, 48px 48px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+::selection {
+  background: var(--color-cyan);
+  color: var(--color-ink);
+}
