@@ -1,52 +1,143 @@
 import { useEffect, useState } from "react";
+import { Menu, X } from "lucide-react";
 import { profile } from "../data/portfolio";
-import StatusDot from "./StatusDot";
 
 const links = [
-  { href: "#about", label: "about" },
-  { href: "#stack", label: "stack" },
-  { href: "#experience", label: "experience" },
-  { href: "#projects", label: "projects" },
-  { href: "#certs", label: "certs" },
-  { href: "#contact", label: "contact" },
+  { href: "#about", label: "About" },
+  { href: "#skills", label: "Skills" },
+  { href: "#experience", label: "Experience" },
+  { href: "#projects", label: "Projects" },
+  { href: "#certifications", label: "Certifications" },
+  { href: "#contact", label: "Contact" },
 ];
 
 export default function Nav() {
   const [scrolled, setScrolled] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState("");
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 8);
+    const onScroll = () => setScrolled(window.scrollY > 50);
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  useEffect(() => {
+    const handleSectionTracking = () => {
+      const sections = document.querySelectorAll("section");
+      let current = "";
+      sections.forEach((section) => {
+        const sectionTop = section.offsetTop;
+        if (window.pageYOffset >= sectionTop - 200) {
+          current = section.getAttribute("id") || "";
+        }
+      });
+      setActiveSection(current);
+    };
+
+    window.addEventListener("scroll", handleSectionTracking);
+    return () => window.removeEventListener("scroll", handleSectionTracking);
+  }, []);
+
   return (
-    <header
-      className={`fixed top-0 z-50 w-full transition-colors duration-300 ${
-        scrolled ? "bg-[var(--color-ink)]/90 backdrop-blur border-b border-[var(--color-line)]" : "border-b border-transparent"
+    <nav
+      className={`fixed top-0 w-full z-50 transition-all duration-300 ${
+        scrolled
+          ? "bg-surface/80 backdrop-blur-md border-b border-outline-variant/30 shadow-sm"
+          : "bg-transparent border-b border-transparent"
       }`}
     >
-      <nav className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
-        <a href="#top" className="flex items-center gap-2 font-[var(--font-mono)] text-sm text-[var(--color-text)]">
-          <StatusDot />
-          <span className="tracking-tight">{profile.name.toLowerCase().replace(" ", "_")}</span>
-        </a>
-        <ul className="hidden gap-8 font-[var(--font-mono)] text-xs uppercase tracking-widest text-[var(--color-muted)] md:flex">
-          {links.map((l) => (
-            <li key={l.href}>
-              <a href={l.href} className="transition-colors hover:text-[var(--color-cyan)]">
-                {l.label}
-              </a>
-            </li>
-          ))}
-        </ul>
+      <div className="flex justify-between items-center max-w-container-max mx-auto px-gutter md:px-xl h-20">
         <a
-          href={`mailto:${profile.email}`}
-          className="rounded-md border border-[var(--color-line)] px-3 py-1.5 font-[var(--font-mono)] text-xs text-[var(--color-cyan)] transition-colors hover:border-[var(--color-cyan)]"
+          href="#"
+          className="font-display-lg text-display-lg-mobile md:text-display-lg tracking-tight text-on-surface font-bold"
         >
-          say hi ↗
+          Rubab Bashir
         </a>
-      </nav>
-    </header>
+
+        {/* Desktop Navigation */}
+        <div className="hidden md:flex items-center gap-lg">
+          {links.map((link) => (
+            <a
+              key={link.href}
+              href={link.href}
+              className={`font-body-md text-body-md transition-colors nav-item relative ${
+                activeSection === link.href.slice(1)
+                  ? "text-primary font-bold"
+                  : "text-on-surface-variant hover:text-primary"
+              }`}
+            >
+              {link.label}
+            </a>
+          ))}
+          <div className="relative group">
+            <button className="bg-primary text-on-primary px-6 py-2 rounded-full font-label-md hover:shadow-lg hover:-translate-y-0.5 active:scale-95 transition-all flex items-center gap-xs">
+              Resume
+              <span className="material-symbols-outlined text-sm">expand_more</span>
+            </button>
+            <div className="absolute right-0 mt-2 w-48 bg-surface-container-high border border-outline-variant rounded-xl shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-50 overflow-hidden">
+              <a
+                href={profile.links.github}
+                target="_blank"
+                rel="noreferrer"
+                className="block px-4 py-3 text-body-md text-on-surface hover:bg-primary/10 transition-colors border-b border-outline-variant/30"
+              >
+                GitHub Profile
+              </a>
+              <a
+                href={profile.links.linkedin}
+                target="_blank"
+                rel="noreferrer"
+                className="block px-4 py-3 text-body-md text-on-surface hover:bg-primary/10 transition-colors"
+              >
+                LinkedIn
+              </a>
+            </div>
+          </div>
+        </div>
+
+        {/* Mobile Menu Button */}
+        <button
+          className="md:hidden text-on-surface"
+          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+        >
+          {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+        </button>
+      </div>
+
+      {/* Mobile Navigation */}
+      {mobileMenuOpen && (
+        <div className="md:hidden absolute top-20 left-0 w-full bg-surface border-b border-outline-variant p-gutter flex flex-col gap-sm">
+          {links.map((link) => (
+            <a
+              key={link.href}
+              href={link.href}
+              className="text-on-surface-variant hover:text-primary transition-colors"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              {link.label}
+            </a>
+          ))}
+          <div className="border-t border-outline-variant/30 pt-sm mt-sm">
+            <a
+              href={profile.links.github}
+              target="_blank"
+              rel="noreferrer"
+              className="block text-on-surface-variant hover:text-primary transition-colors mb-sm"
+            >
+              GitHub
+            </a>
+            <a
+              href={profile.links.linkedin}
+              target="_blank"
+              rel="noreferrer"
+              className="block text-on-surface-variant hover:text-primary transition-colors"
+            >
+              LinkedIn
+            </a>
+          </div>
+        </div>
+      )}
+    </nav>
   );
 }

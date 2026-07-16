@@ -1,20 +1,16 @@
 import { motion } from "framer-motion";
 import { experience } from "../data/portfolio";
-import StatusDot from "./StatusDot";
 
 export default function Experience() {
   return (
-    <section id="experience" className="mx-auto max-w-6xl px-6 py-28">
-      <div className="mb-12">
-        <p className="font-[var(--font-mono)] text-xs uppercase tracking-widest text-[var(--color-cyan)]">
-           experience
-        </p>
-        <h2 className="mt-2 font-[var(--font-display)] text-3xl font-semibold text-[var(--color-text)] sm:text-4xl">
-          Where the hours went
+    <section id="experience" className="mx-auto max-w-container-max px-gutter md:px-xl py-xl">
+      <div className="mb-xl">
+        <h2 className="font-display-lg text-display-lg-mobile md:text-display-lg text-on-surface mb-md reveal-on-scroll">
+          Professional <span className="text-primary">Experience</span>
         </h2>
       </div>
 
-      <div className="relative border-l border-[var(--color-line)] pl-8">
+      <div className="relative border-l-2 border-primary/30 pl-lg space-y-lg reveal-on-scroll">
         {experience.map((role, i) => (
           <motion.div
             key={role.org}
@@ -22,30 +18,40 @@ export default function Experience() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: "-60px" }}
             transition={{ duration: 0.4, delay: i * 0.08 }}
-            className="relative mb-10 last:mb-0"
+            className="relative"
           >
-            <span className="absolute -left-[2.28rem] top-1.5 h-2.5 w-2.5 rounded-full bg-[var(--color-cyan)]" />
-            <div className="flex flex-wrap items-center gap-x-3 gap-y-1 font-[var(--font-mono)] text-xs text-[var(--color-muted)]">
-              <span>{role.period}</span>
-              <span>·</span>
-              <span>{role.location}</span>
-              {role.status === "running" && (
-                <span className="inline-flex items-center gap-1.5 text-[var(--color-amber)]">
-                  <StatusDot color="amber" /> in progress
-                </span>
-              )}
+            <span className="absolute -left-[1.65rem] top-2 h-3 w-3 rounded-full bg-primary border-2 border-background" />
+            <div className="glass-card p-lg rounded-2xl border border-outline-variant/30 hover:shadow-lg transition-all">
+              <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-md mb-md">
+                <div>
+                  <h3 className="font-headline-md text-on-surface">
+                    {role.role}
+                  </h3>
+                  <p className="text-primary font-label-md uppercase tracking-wider mt-xs">
+                    {role.org}
+                  </p>
+                </div>
+                {role.status === "running" && (
+                  <span className="inline-flex items-center gap-xs bg-secondary-container/20 text-secondary-container px-3 py-1 rounded-full font-label-sm">
+                    <span className="h-2 w-2 rounded-full bg-secondary-container animate-pulse" />
+                    In Progress
+                  </span>
+                )}
+              </div>
+              <div className="flex flex-wrap gap-md text-on-surface-variant text-body-md mb-md">
+                <span>{role.period}</span>
+                <span>·</span>
+                <span>{role.location}</span>
+              </div>
+              <ul className="space-y-sm">
+                {role.bullets.map((bullet) => (
+                  <li key={bullet} className="flex gap-md text-on-surface-variant text-body-md">
+                    <span className="text-primary mt-1">▸</span>
+                    <span>{bullet}</span>
+                  </li>
+                ))}
+              </ul>
             </div>
-            <h3 className="mt-1 font-[var(--font-display)] text-xl text-[var(--color-text)]">
-              {role.role} <span className="text-[var(--color-muted)]">@ {role.org}</span>
-            </h3>
-            <ul className="mt-3 space-y-1.5">
-              {role.bullets.map((b) => (
-                <li key={b} className="flex gap-2 text-sm leading-relaxed text-[var(--color-muted)]">
-                  <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-[var(--color-line)]" />
-                  {b}
-                </li>
-              ))}
-            </ul>
           </motion.div>
         ))}
       </div>

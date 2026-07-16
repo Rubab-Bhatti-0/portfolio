@@ -1,87 +1,156 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Mail, Code2, Globe } from "lucide-react";
 import { profile } from "../data/portfolio";
 
 export default function Contact() {
-  const [form, setForm] = useState({ name: "", message: "" });
+  const [form, setForm] = useState({ name: "", email: "", message: "" });
 
-  const mailtoHref = `mailto:${profile.email}?subject=${encodeURIComponent(
-    `Portfolio inquiry from ${form.name || "a visitor"}`
-  )}&body=${encodeURIComponent(form.message)}`;
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    const mailtoHref = `mailto:${profile.email}?subject=${encodeURIComponent(
+      `Portfolio inquiry from ${form.name || "a visitor"}`
+    )}&body=${encodeURIComponent(form.message)}`;
+    window.location.href = mailtoHref;
+  };
 
   return (
-    <section id="contact" className="mx-auto max-w-6xl px-6 py-28">
-      <div className="grid gap-12 md:grid-cols-2">
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-60px" }}
-          transition={{ duration: 0.5 }}
-        >
-          <p className="font-[var(--font-mono)] text-xs uppercase tracking-widest text-[var(--color-cyan)]">
-             contact
-          </p>
-          <h2 className="mt-2 font-[var(--font-display)] text-3xl font-semibold text-[var(--color-text)] sm:text-4xl">
-            Open a connection
-          </h2>
-          <p className="mt-4 max-w-md text-[var(--color-muted)]">
-            Have a role, project, or collaboration in mind? Send a message directly, or reach out on any of the
-            channels below.
-          </p>
-          <div className="mt-8 flex flex-col gap-3 font-[var(--font-mono)] text-sm">
-            <a href={`mailto:${profile.email}`} className="flex items-center gap-3 text-[var(--color-text)] transition-colors hover:text-[var(--color-cyan)]">
-              <Mail size={16} /> {profile.email}
-            </a>
-            <a href={profile.links.github} target="_blank" rel="noreferrer" className="flex items-center gap-3 text-[var(--color-text)] transition-colors hover:text-[var(--color-cyan)]">
-              <Code2 size={16} /> github.com/Rubab-Bhatti-0
-            </a>
-            <a href={profile.links.linkedin} target="_blank" rel="noreferrer" className="flex items-center gap-3 text-[var(--color-text)] transition-colors hover:text-[var(--color-cyan)]">
-              <Globe size={16} /> LinkedIn
-            </a>
-            <a href={profile.links.leetcode} target="_blank" rel="noreferrer" className="flex items-center gap-3 text-[var(--color-text)] transition-colors hover:text-[var(--color-cyan)]">
-              <Code2 size={16} /> LeetCode
-            </a>
-          </div>
-        </motion.div>
-
-        <motion.form
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-60px" }}
-          transition={{ duration: 0.5, delay: 0.1 }}
-          onSubmit={(e) => e.preventDefault()}
-          className="rounded-xl border border-[var(--color-line)] bg-[var(--color-panel)]/60 p-6"
-        >
-          <label className="block font-[var(--font-mono)] text-xs uppercase tracking-widest text-[var(--color-muted)]">
-            your name
-          </label>
-          <input
-            value={form.name}
-            onChange={(e) => setForm({ ...form, name: e.target.value })}
-            className="mt-2 w-full rounded-md border border-[var(--color-line)] bg-[var(--color-ink)] px-3 py-2 text-sm text-[var(--color-text)] outline-none focus:border-[var(--color-cyan)]"
-            placeholder="Jane Doe"
-          />
-          <label className="mt-4 block font-[var(--font-mono)] text-xs uppercase tracking-widest text-[var(--color-muted)]">
-            message
-          </label>
-          <textarea
-            value={form.message}
-            onChange={(e) => setForm({ ...form, message: e.target.value })}
-            rows={5}
-            className="mt-2 w-full resize-none rounded-md border border-[var(--color-line)] bg-[var(--color-ink)] px-3 py-2 text-sm text-[var(--color-text)] outline-none focus:border-[var(--color-cyan)]"
-            placeholder="Let's build something..."
-          />
-          <a
-            href={mailtoHref}
-            className="mt-5 inline-block w-full rounded-md bg-[var(--color-cyan)] px-5 py-2.5 text-center font-[var(--font-mono)] text-sm font-medium text-[var(--color-ink)] transition-transform hover:scale-[1.02]"
+    <section id="contact" className="py-xl bg-surface-container-low">
+      <div className="max-w-container-max mx-auto px-gutter md:px-xl">
+        <div className="grid lg:grid-cols-2 gap-xl">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-60px" }}
+            transition={{ duration: 0.5 }}
+            className="reveal-on-scroll"
           >
-            send message
-          </a>
-          {/* <p className="mt-3 text-center font-[var(--font-mono)] text-[10px] text-[var(--color-muted)]">
-            opens your email client — no backend attached
-          </p> */}
-        </motion.form>
+            <h2 className="font-display-lg text-display-lg-mobile md:text-display-lg mb-md text-on-surface">
+              Let's Build <span className="text-primary">Something Together</span>
+            </h2>
+            <p className="font-body-lg text-body-lg text-on-surface-variant mb-lg max-w-md">
+              Whether you have a project in mind, want to talk ML, or just want to connect, my inbox is always open.
+            </p>
+
+            {/* Contact Info */}
+            <div className="space-y-md mb-xl">
+              <div className="flex items-center gap-sm">
+                <div className="w-12 h-12 rounded-full bg-surface-container-high flex items-center justify-center text-primary">
+                  <span className="material-symbols-outlined">location_on</span>
+                </div>
+                <div>
+                  <div className="font-label-sm text-outline uppercase tracking-wider text-on-surface-variant">
+                    Location
+                  </div>
+                  <div className="font-body-md text-on-surface">{profile.location}</div>
+                </div>
+              </div>
+              <div className="flex items-center gap-sm">
+                <div className="w-12 h-12 rounded-full bg-surface-container-high flex items-center justify-center text-primary">
+                  <span className="material-symbols-outlined">mail</span>
+                </div>
+                <div>
+                  <div className="font-label-sm text-outline uppercase tracking-wider text-on-surface-variant">
+                    Email
+                  </div>
+                  <a
+                    href={`mailto:${profile.email}`}
+                    className="font-body-md text-on-surface hover:text-primary transition-colors"
+                  >
+                    {profile.email}
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            {/* Social Links */}
+            <div className="flex gap-md">
+              <a
+                href={profile.links.github}
+                target="_blank"
+                rel="noreferrer"
+                className="w-12 h-12 rounded-full border border-outline-variant flex items-center justify-center hover:bg-primary hover:text-on-primary hover:border-primary transition-all"
+                title="GitHub"
+              >
+                <span className="material-symbols-outlined">code</span>
+              </a>
+              <a
+                href={profile.links.linkedin}
+                target="_blank"
+                rel="noreferrer"
+                className="w-12 h-12 rounded-full border border-outline-variant flex items-center justify-center hover:bg-primary hover:text-on-primary hover:border-primary transition-all"
+                title="LinkedIn"
+              >
+                <span className="material-symbols-outlined">link</span>
+              </a>
+              <a
+                href={profile.links.leetcode}
+                target="_blank"
+                rel="noreferrer"
+                className="w-12 h-12 rounded-full border border-outline-variant flex items-center justify-center hover:bg-primary hover:text-on-primary hover:border-primary transition-all"
+                title="LeetCode"
+              >
+                <span className="material-symbols-outlined">terminal</span>
+              </a>
+            </div>
+          </motion.div>
+
+          {/* Contact Form */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-60px" }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="glass-card p-lg rounded-2xl reveal-on-scroll"
+            style={{ transitionDelay: "200ms" }}
+          >
+            <form onSubmit={handleSubmit} className="space-y-md">
+              <div className="grid md:grid-cols-2 gap-md">
+                <div>
+                  <label className="block font-label-md text-on-surface-variant mb-base">
+                    Name
+                  </label>
+                  <input
+                    type="text"
+                    value={form.name}
+                    onChange={(e) => setForm({ ...form, name: e.target.value })}
+                    placeholder="John Doe"
+                    className="w-full bg-surface border border-outline-variant rounded-lg px-4 py-3 text-on-surface placeholder-on-surface-variant/50 focus:ring-2 focus:ring-primary focus:border-primary transition-all outline-none"
+                  />
+                </div>
+                <div>
+                  <label className="block font-label-md text-on-surface-variant mb-base">
+                    Email
+                  </label>
+                  <input
+                    type="email"
+                    value={form.email}
+                    onChange={(e) => setForm({ ...form, email: e.target.value })}
+                    placeholder="john@example.com"
+                    className="w-full bg-surface border border-outline-variant rounded-lg px-4 py-3 text-on-surface placeholder-on-surface-variant/50 focus:ring-2 focus:ring-primary focus:border-primary transition-all outline-none"
+                  />
+                </div>
+              </div>
+              <div>
+                <label className="block font-label-md text-on-surface-variant mb-base">
+                  Message
+                </label>
+                <textarea
+                  value={form.message}
+                  onChange={(e) => setForm({ ...form, message: e.target.value })}
+                  placeholder="Your message here..."
+                  rows={5}
+                  className="w-full bg-surface border border-outline-variant rounded-lg px-4 py-3 text-on-surface placeholder-on-surface-variant/50 focus:ring-2 focus:ring-primary focus:border-primary transition-all outline-none resize-none"
+                />
+              </div>
+              <button
+                type="submit"
+                className="w-full bg-primary text-on-primary py-4 rounded-xl font-label-md hover:shadow-lg active:scale-95 transition-all"
+              >
+                Send Message
+              </button>
+            </form>
+          </motion.div>
+        </div>
       </div>
     </section>
   );

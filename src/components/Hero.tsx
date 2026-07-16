@@ -1,98 +1,193 @@
 import { motion } from "framer-motion";
-import { profile, experience } from "../data/portfolio";
-import StatusDot from "./StatusDot";
-
-function useUptime() {
-  const start = new Date("2024-02-01T00:00:00Z");
-  const now = new Date();
-  const days = Math.floor((now.getTime() - start.getTime()) / (1000 * 60 * 60 * 24));
-  return days;
-}
+import { profile } from "../data/portfolio";
 
 export default function Hero() {
-  const uptime = useUptime();
-  const running = experience.filter((e) => e.status === "running");
-
   return (
-    <section id="top" className="relative flex min-h-screen items-center px-6 pt-24">
-      <div className="mx-auto grid w-full max-w-6xl gap-12 md:grid-cols-[1.3fr_1fr] md:items-center">
+    <section
+      id="hero"
+      className="relative min-h-screen flex items-center pt-20 overflow-hidden"
+    >
+      {/* Animated Background */}
+      <div className="absolute inset-0 w-full h-full opacity-40">
+        <canvas
+          id="shader-canvas"
+          style={{ display: "block", width: "100%", height: "100%" }}
+        />
+      </div>
+
+      {/* Content */}
+      <div className="max-w-container-max mx-auto px-gutter md:px-xl relative z-10 grid md:grid-cols-2 gap-xl items-center">
         <motion.div
-          initial={{ opacity: 0, y: 16 }}
+          initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          className="reveal-on-scroll active"
         >
-          <p className="mb-4 flex items-center gap-2 font-[var(--font-mono)] text-xs uppercase tracking-widest text-[var(--color-cyan)]">
-            <StatusDot />  {profile.location}
-          </p>
-          <h1 className="font-[var(--font-display)] text-5xl font-semibold leading-[1.05] tracking-tight text-[var(--color-text)] sm:text-6xl">
+          <span className="inline-block py-1 px-4 rounded-full bg-primary-container/10 text-primary font-label-md mb-md">
+            Available for Collaboration
+          </span>
+          <h1 className="font-display-xl text-display-lg-mobile md:text-display-xl text-on-surface mb-sm">
             {profile.name}
           </h1>
-          <p className="mt-4 font-[var(--font-display)] text-2xl text-[var(--color-muted)] sm:text-3xl">
-            {profile.role}
-          </p>
-          <p className="mt-6 max-w-xl text-base leading-relaxed text-[var(--color-muted)]">
+          <h2 className="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface-variant mb-md leading-tight">
+            Computer Science Student · <span className="text-primary">Full-Stack Developer & ML Engineer</span>
+          </h2>
+          <p className="font-body-lg text-body-lg text-outline mb-lg max-w-xl">
             {profile.summary}
           </p>
-          <div className="mt-8 flex flex-wrap gap-3">
+          <div className="flex flex-wrap gap-sm">
             <a
               href="#projects"
-              className="rounded-md bg-[var(--color-cyan)] px-5 py-2.5 font-[var(--font-mono)] text-sm font-medium text-[var(--color-ink)] transition-transform hover:scale-[1.03]"
+              className="bg-primary text-on-primary px-8 py-4 rounded-full font-label-md flex items-center gap-xs hover:shadow-xl hover:-translate-y-1 transition-all group"
             >
-              view projects
+              View Projects
+              <span className="material-symbols-outlined group-hover:translate-x-1 transition-transform">
+                arrow_forward
+              </span>
             </a>
             <a
               href={profile.links.github}
               target="_blank"
               rel="noreferrer"
-              className="rounded-md border border-[var(--color-line)] px-5 py-2.5 font-[var(--font-mono)] text-sm text-[var(--color-text)] transition-colors hover:border-[var(--color-cyan)]"
+              className="bg-surface-container-high text-on-surface px-8 py-4 rounded-full font-label-md flex items-center gap-xs hover:shadow-lg transition-all"
             >
-              github ↗
-            </a>
-            <a
-              href={profile.links.linkedin}
-              target="_blank"
-              rel="noreferrer"
-              className="rounded-md border border-[var(--color-line)] px-5 py-2.5 font-[var(--font-mono)] text-sm text-[var(--color-text)] transition-colors hover:border-[var(--color-cyan)]"
-            >
-              linkedin ↗
+              GitHub
+              <span className="material-symbols-outlined">north_east</span>
             </a>
           </div>
         </motion.div>
 
+        {/* Right Column - Stats/Info */}
         <motion.div
-          initial={{ opacity: 0, y: 16 }}
+          initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.15, ease: "easeOut" }}
-          className="rounded-xl border border-[var(--color-line)] bg-[var(--color-panel)]/80 p-5 font-[var(--font-mono)] text-xs shadow-[0_0_40px_-15px_rgba(79,216,201,0.35)] backdrop-blur"
+          transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
+          className="reveal-on-scroll active"
+          style={{ transitionDelay: "200ms" }}
         >
-          <div className="mb-4 flex items-center justify-between border-b border-[var(--color-line)] pb-3 text-[var(--color-muted)]">
-            <span>status.log</span>
-            <span className="flex gap-1.5">
-              <span className="h-2.5 w-2.5 rounded-full bg-[var(--color-amber)]/60" />
-              <span className="h-2.5 w-2.5 rounded-full bg-[var(--color-cyan)]/60" />
-              <span className="h-2.5 w-2.5 rounded-full bg-[var(--color-muted)]/40" />
-            </span>
-          </div>
-          <div className="space-y-2 text-[var(--color-muted)]">
-            <p>
-              <span className="text-[var(--color-cyan)]">$</span> uptime --since 2024-02
-            </p>
-            <p className="pl-4 text-[var(--color-text)]">{uptime.toLocaleString()} days building</p>
-            <p className="pt-2">
-              <span className="text-[var(--color-cyan)]">$</span> ps --running
-            </p>
-            {running.map((r) => (
-              <p key={r.org} className="pl-4 text-[var(--color-text)]">
-                <StatusDot color="amber" /> <span className="ml-1">{r.role} @ {r.org}</span>
-              </p>
-            ))}
-            <p className="pt-2">
-              <span className="text-[var(--color-cyan)]">$</span> whoami
-            </p>
-            <p className="pl-4 text-[var(--color-text)]">CS undergrad · COMSATS University</p>
+          <div className="glass-card p-lg rounded-2xl border border-outline-variant/30">
+            <div className="space-y-md">
+              <div>
+                <p className="text-outline font-label-sm uppercase tracking-wider text-on-surface-variant">
+                  Current Role
+                </p>
+                <p className="font-headline-md text-on-surface mt-base">
+                  {profile.role}
+                </p>
+              </div>
+              <div className="border-t border-outline-variant/30 pt-md">
+                <p className="text-outline font-label-sm uppercase tracking-wider text-on-surface-variant">
+                  Education
+                </p>
+                <p className="font-body-md text-on-surface mt-base">
+                  {profile.education.degree}
+                </p>
+                <p className="text-on-surface-variant text-body-md mt-xs">
+                  {profile.education.school}
+                </p>
+                <p className="text-on-surface-variant text-body-md mt-xs">
+                  {profile.education.period}
+                </p>
+              </div>
+              <div className="border-t border-outline-variant/30 pt-md">
+                <p className="text-outline font-label-sm uppercase tracking-wider text-on-surface-variant">
+                  Location
+                </p>
+                <p className="font-body-md text-on-surface mt-base">{profile.location}</p>
+              </div>
+            </div>
           </div>
         </motion.div>
       </div>
+
+      {/* WebGL Shader Script */}
+      <script>{`
+        (function() {
+          const canvas = document.getElementById('shader-canvas');
+          if (!canvas) return;
+
+          function syncSize() {
+            const w = canvas.clientWidth || 1280;
+            const h = canvas.clientHeight || 720;
+            if (canvas.width !== w || canvas.height !== h) {
+              canvas.width = w;
+              canvas.height = h;
+            }
+          }
+
+          if (typeof ResizeObserver !== 'undefined') {
+            new ResizeObserver(syncSize).observe(canvas);
+          }
+          syncSize();
+
+          const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+          if (!gl) return;
+
+          const vs = \`attribute vec2 a_position;
+varying vec2 v_texCoord;
+void main() {
+  v_texCoord = a_position * 0.5 + 0.5;
+  gl_Position = vec4(a_position, 0.0, 1.0);
+}\`;
+
+          const fs = \`precision highp float;
+varying vec2 v_texCoord;
+uniform float u_time;
+uniform vec2 u_resolution;
+
+void main() {
+    vec2 uv = v_texCoord;
+    
+    float noise1 = sin(uv.x * 2.0 + u_time * 0.2) * 0.5 + 0.5;
+    float noise2 = cos(uv.y * 3.0 - u_time * 0.3) * 0.5 + 0.5;
+    
+    vec3 color1 = vec3(0.31, 0.27, 0.9);
+    vec3 color2 = vec3(0.98, 0.45, 0.09);
+    vec3 color3 = vec3(0.99, 0.99, 1.0);
+    
+    vec3 color = mix(color1, color2, noise1 * 0.5);
+    color = mix(color, color3, noise2 * 0.7);
+    
+    float vignette = 1.0 - length(uv - 0.5) * 0.4;
+    
+    gl_FragColor = vec4(color * vignette, 0.08);
+}\`;
+
+          function cs(type, src) {
+            const s = gl.createShader(type);
+            gl.shaderSource(s, src);
+            gl.compileShader(s);
+            return s;
+          }
+
+          const prog = gl.createProgram();
+          gl.attachShader(prog, cs(gl.VERTEX_SHADER, vs));
+          gl.attachShader(prog, cs(gl.FRAGMENT_SHADER, fs));
+          gl.linkProgram(prog);
+          gl.useProgram(prog);
+
+          const buf = gl.createBuffer();
+          gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+          gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 1,-1, -1,1, 1,1]), gl.STATIC_DRAW);
+
+          const pos = gl.getAttribLocation(prog, 'a_position');
+          gl.enableVertexAttribArray(pos);
+          gl.vertexAttribPointer(pos, 2, gl.FLOAT, false, 0, 0);
+
+          const uTime = gl.getUniformLocation(prog, 'u_time');
+          const uRes = gl.getUniformLocation(prog, 'u_resolution');
+
+          function render(t) {
+            if (typeof ResizeObserver === 'undefined') syncSize();
+            gl.viewport(0, 0, canvas.width, canvas.height);
+            if (uTime) gl.uniform1f(uTime, t * 0.001);
+            if (uRes) gl.uniform2f(uRes, canvas.width, canvas.height);
+            gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+            requestAnimationFrame(render);
+          }
+          render(0);
+        })();
+      `}</script>
     </section>
   );
 }
