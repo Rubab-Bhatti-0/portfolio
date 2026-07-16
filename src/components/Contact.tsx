@@ -27,7 +27,7 @@ export default function Contact() {
             <h2 className="font-display-lg text-display-lg-mobile md:text-display-lg mb-md text-on-surface">
               Let's Build <span className="text-primary">Something Together</span>
             </h2>
-            <p className="font-body-lg text-body-lg text-on-surface-variant mb-lg max-w-md break-words whitespace-normal">
+            <p className="font-body-lg text-body-lg text-on-surface-variant mb-lg max-w-2xl break-words whitespace-normal text-left">
               Whether you have a project in mind, want to talk ML, or just want to connect, my inbox is always open.
             </p>
 

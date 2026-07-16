@@ -54,8 +54,8 @@ export default function Nav() {
           : "bg-transparent border-b border-transparent"
       }`}
     >
-      <div className="flex justify-between items-center w-full max-w-container-max mx-auto px-gutter md:px-xl h-20">
-        <div className="flex-1 flex justify-start">
+      <div className="grid grid-cols-2 md:grid-cols-3 items-center w-full max-w-container-max mx-auto px-gutter md:px-xl h-20">
+        <div className="flex justify-start">
           <a
             href="#"
             className="font-display-lg text-display-lg-mobile md:text-display-lg tracking-tight text-on-surface font-bold shrink-0"
@@ -65,7 +65,7 @@ export default function Nav() {
         </div>
 
         {/* Desktop Navigation Links - Middle */}
-        <div className="hidden md:flex items-center justify-center gap-lg flex-1">
+        <div className="hidden md:flex items-center justify-center gap-lg">
           {links.map((link) => (
             <a
               key={link.href}
@@ -82,7 +82,7 @@ export default function Nav() {
         </div>
 
         {/* Desktop Resume Button - Right */}
-        <div className="hidden md:flex items-center justify-end flex-1">
+        <div className="hidden md:flex items-center justify-end">
           <div className="relative group">
             <button className="bg-primary text-on-primary px-6 py-2 rounded-full font-label-md hover:shadow-lg hover:-translate-y-0.5 active:scale-95 transition-all flex items-center gap-xs whitespace-nowrap">
               Resume
@@ -110,7 +110,7 @@ export default function Nav() {
         </div>
 
         {/* Mobile Menu Button */}
-        <div className="md:hidden flex items-center">
+        <div className="md:hidden flex justify-end">
           <button
             className="text-on-surface"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
