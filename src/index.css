@@ -50,6 +50,67 @@
   --color-on-primary-fixed: #0f0069;
   --color-surface-tint: #4d44e3;
   --color-on-error: #ffffff;
+
+  /* Custom Spacing */
+  --spacing-sm: 16px;
+  --spacing-lg: 48px;
+  --spacing-gutter: 24px;
+  --spacing-container-max: 1280px;
+  --spacing-md: 24px;
+  --spacing-xs: 8px;
+  --spacing-base: 4px;
+  --spacing-xl: 80px;
+
+  /* Custom Font Families */
+  --font-display-lg-mobile: "Space Grotesk";
+  --font-headline-md: "Space Grotesk";
+  --font-label-sm: "DM Sans";
+  --font-body-lg: "DM Sans";
+  --font-display-lg: "Space Grotesk";
+  --font-body-md: "DM Sans";
+  --font-display-xl: "Space Grotesk";
+  --font-label-md: "DM Sans";
+  --font-headline-lg: "Space Grotesk";
+
+  /* Custom Font Sizes */
+  --text-display-lg-mobile: 36px;
+  --text-display-lg-mobile--line-height: 1.2;
+  --text-display-lg-mobile--font-weight: 700;
+
+  --text-headline-md: 24px;
+  --text-headline-md--line-height: 1.3;
+  --text-headline-md--font-weight: 600;
+
+  --text-label-sm: 12px;
+  --text-label-sm--line-height: 1.2;
+  --text-label-sm--font-weight: 700;
+
+  --text-body-lg: 18px;
+  --text-body-lg--line-height: 1.6;
+  --text-body-lg--font-weight: 400;
+
+  --text-display-lg: 48px;
+  --text-display-lg--line-height: 1.1;
+  --text-display-lg--letter-spacing: -0.02em;
+  --text-display-lg--font-weight: 700;
+
+  --text-body-md: 16px;
+  --text-body-md--line-height: 1.6;
+  --text-body-md--font-weight: 400;
+
+  --text-display-xl: 64px;
+  --text-display-xl--line-height: 1.1;
+  --text-display-xl--letter-spacing: -0.02em;
+  --text-display-xl--font-weight: 700;
+
+  --text-label-md: 14px;
+  --text-label-md--line-height: 1.4;
+  --text-label-md--letter-spacing: 0.01em;
+  --text-label-md--font-weight: 500;
+
+  --text-headline-lg: 32px;
+  --text-headline-lg--line-height: 1.2;
+  --text-headline-lg--font-weight: 600;
 }
 
 html {
