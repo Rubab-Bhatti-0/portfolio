@@ -55,15 +55,17 @@ export default function Nav() {
       }`}
     >
       <div className="flex justify-between items-center w-full max-w-container-max mx-auto px-gutter md:px-xl h-20">
-        <a
-          href="#"
-          className="font-display-lg text-display-lg-mobile md:text-display-lg tracking-tight text-on-surface font-bold shrink-0"
-        >
-          Rubab Bashir
-        </a>
+        <div className="flex-1 flex justify-start">
+          <a
+            href="#"
+            className="font-display-lg text-display-lg-mobile md:text-display-lg tracking-tight text-on-surface font-bold shrink-0"
+          >
+            Rubab Bashir
+          </a>
+        </div>
 
-        {/* Desktop Navigation */}
-        <div className="hidden md:flex items-center gap-lg ml-auto">
+        {/* Desktop Navigation Links - Middle */}
+        <div className="hidden md:flex items-center justify-center gap-lg flex-1">
           {links.map((link) => (
             <a
               key={link.href}
@@ -77,7 +79,11 @@ export default function Nav() {
               {link.label}
             </a>
           ))}
-          <div className="relative group ml-4">
+        </div>
+
+        {/* Desktop Resume Button - Right */}
+        <div className="hidden md:flex items-center justify-end flex-1">
+          <div className="relative group">
             <button className="bg-primary text-on-primary px-6 py-2 rounded-full font-label-md hover:shadow-lg hover:-translate-y-0.5 active:scale-95 transition-all flex items-center gap-xs whitespace-nowrap">
               Resume
               <span className="material-symbols-outlined text-sm">expand_more</span>
@@ -104,12 +110,14 @@ export default function Nav() {
         </div>
 
         {/* Mobile Menu Button */}
-        <button
-          className="md:hidden text-on-surface"
-          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-        >
-          {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-        </button>
+        <div className="md:hidden flex items-center">
+          <button
+            className="text-on-surface"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          >
+            {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
+        </div>
       </div>
 
       {/* Mobile Navigation */}

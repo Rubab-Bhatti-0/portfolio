@@ -122,6 +122,17 @@ body {
   color: var(--color-on-surface);
   font-family: "DM Sans", sans-serif;
   @apply selection:bg-primary-container selection:text-on-primary-container;
+  overflow-x: hidden;
+}
+
+/* Remove default scrollbar */
+::-webkit-scrollbar {
+  display: none;
+}
+
+* {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
 }
 
 @layer components {
