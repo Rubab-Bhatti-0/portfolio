@@ -31,11 +31,18 @@ export default function Nav() {
         if (window.pageYOffset >= sectionTop - 200) {
           current = section.getAttribute("id") || "";
         }
+        
+        // Ensure section is visible
+        if (window.pageYOffset >= sectionTop - window.innerHeight * 0.8) {
+          section.classList.add("active");
+          section.querySelectorAll(".reveal-on-scroll").forEach(el => el.classList.add("active"));
+        }
       });
       setActiveSection(current);
     };
 
     window.addEventListener("scroll", handleSectionTracking);
+    handleSectionTracking(); // Initial check
     return () => window.removeEventListener("scroll", handleSectionTracking);
   }, []);
 
@@ -47,21 +54,21 @@ export default function Nav() {
           : "bg-transparent border-b border-transparent"
       }`}
     >
-      <div className="flex justify-between items-center max-w-container-max mx-auto px-gutter md:px-xl h-20">
+      <div className="flex justify-between items-center w-full max-w-container-max mx-auto px-gutter md:px-xl h-20">
         <a
           href="#"
-          className="font-display-lg text-display-lg-mobile md:text-display-lg tracking-tight text-on-surface font-bold"
+          className="font-display-lg text-display-lg-mobile md:text-display-lg tracking-tight text-on-surface font-bold shrink-0"
         >
           Rubab Bashir
         </a>
 
         {/* Desktop Navigation */}
-        <div className="hidden md:flex items-center gap-lg">
+        <div className="hidden md:flex items-center gap-lg ml-auto">
           {links.map((link) => (
             <a
               key={link.href}
               href={link.href}
-              className={`font-body-md text-body-md transition-colors nav-item relative ${
+              className={`font-body-md text-body-md transition-colors nav-item relative whitespace-nowrap ${
                 activeSection === link.href.slice(1)
                   ? "text-primary font-bold"
                   : "text-on-surface-variant hover:text-primary"
@@ -70,8 +77,8 @@ export default function Nav() {
               {link.label}
             </a>
           ))}
-          <div className="relative group">
-            <button className="bg-primary text-on-primary px-6 py-2 rounded-full font-label-md hover:shadow-lg hover:-translate-y-0.5 active:scale-95 transition-all flex items-center gap-xs">
+          <div className="relative group ml-4">
+            <button className="bg-primary text-on-primary px-6 py-2 rounded-full font-label-md hover:shadow-lg hover:-translate-y-0.5 active:scale-95 transition-all flex items-center gap-xs whitespace-nowrap">
               Resume
               <span className="material-symbols-outlined text-sm">expand_more</span>
             </button>

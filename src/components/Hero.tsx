@@ -32,7 +32,7 @@ export default function Hero() {
           <h2 className="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface-variant mb-md leading-tight">
             Computer Science Student · <span className="text-primary">Full-Stack Developer & ML Engineer</span>
           </h2>
-          <p className="font-body-lg text-body-lg text-outline mb-lg max-w-xl">
+          <p className="font-body-lg text-body-lg text-outline mb-lg max-w-xl break-words whitespace-normal">
             {profile.summary}
           </p>
           <div className="flex flex-wrap gap-sm">

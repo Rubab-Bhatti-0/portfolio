@@ -130,12 +130,13 @@ body {
   }
 
   .reveal-on-scroll {
-    @apply opacity-0 translate-y-[30px] transition-all duration-[800ms];
+    /* Temporarily disabling opacity-0 to ensure visibility while debugging scroll triggers */
+    @apply translate-y-[30px] transition-all duration-[800ms];
     transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   .reveal-on-scroll.active {
-    @apply opacity-100 translate-y-0;
+    @apply translate-y-0;
   }
 
   .nav-item {

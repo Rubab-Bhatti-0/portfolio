@@ -15,7 +15,7 @@ export default function About() {
           About <span className="text-primary">Me</span>
         </h2>
         <div className="max-w-3xl">
-          <p className="font-body-lg text-body-lg text-on-surface-variant mb-lg leading-relaxed">
+          <p className="font-body-lg text-body-lg text-on-surface-variant mb-lg leading-relaxed break-words whitespace-normal">
             {profile.summary}
           </p>
           <div className="glass-card p-lg rounded-2xl border border-outline-variant/30">
