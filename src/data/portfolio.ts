@@ -73,7 +73,7 @@ export const certifications = [
     name: "React Basics",
     issuer: "Meta",
     courseUrl: "https://www.coursera.org/learn/react-basics",
-    verifyUrl: "",
+    verifyUrl: "https://www.coursera.org/account/accomplishments/records/G24NB0IVMINM",
   },
   {
     name: "Claude Code in Action",
@@ -85,6 +85,12 @@ export const certifications = [
     name: "Claude Platform 101",
     issuer: "Anthropic Academy",
     courseUrl: "https://anthropic.skilljar.com/claude-platform-101",
+    verifyUrl: "",
+  },
+    {
+    name: "Advanced JavaScript 2: Async JS, APIs, Operators, Objects",
+    issuer: "Scrimba",
+    courseUrl: "https://www.coursera.org/account/accomplishments/records/BSBJ7QWD3TD5",
     verifyUrl: "",
   },
 ];

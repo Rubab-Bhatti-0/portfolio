@@ -54,7 +54,7 @@ export default function Nav() {
           : "bg-transparent border-b border-transparent"
       }`}
     >
-      <div className="grid grid-cols-2 md:grid-cols-3 items-center w-full max-w-container-max mx-auto px-gutter md:px-xl h-20">
+      <div className="flex items-center justify-between w-full max-w-container-max mx-auto px-gutter md:px-xl h-20">
         <div className="flex justify-start">
           <a
             href="#"

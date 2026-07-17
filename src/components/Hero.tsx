@@ -26,16 +26,15 @@ export default function Hero() {
           <span className="inline-block py-1 px-4 rounded-full bg-primary-container/10 text-primary font-label-md mb-md">
             Available for Collaboration
           </span>
-          <h1 className="font-display-xl text-display-lg-mobile md:text-display-xl text-on-surface mb-sm">
-            {profile.name}
-          </h1>
+
           <h2 className="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-surface-variant mb-md leading-tight">
             Computer Science Student · <span className="text-primary">Full-Stack Developer & ML Engineer</span>
           </h2>
-          <p className="font-body-lg text-body-lg text-outline mb-lg max-w-xl break-words whitespace-normal">
+          <p className="mt-6 max-w-2xl text-lg leading-8 text-on-surface-variant mb-8">
             {profile.summary}
           </p>
-          <div className="flex flex-wrap gap-sm">
+
+          <div className="flex flex-wrap gap-sm mt-2">
             <a
               href="#projects"
               className="bg-primary text-on-primary px-8 py-4 rounded-full font-label-md flex items-center gap-xs hover:shadow-xl hover:-translate-y-1 transition-all group"
