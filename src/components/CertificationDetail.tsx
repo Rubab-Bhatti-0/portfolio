@@ -36,7 +36,7 @@ export default function CertificationDetail() {
           {filteredCerts.map((cert, i) => (
             <motion.a
               key={cert.name}
-              href={cert.courseUrl}
+              href={cert.verifyUrl || cert.courseUrl}
               target="_blank"
               rel="noreferrer"
               initial={{ opacity: 0, y: 20 }}

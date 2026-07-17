@@ -1,5 +1,5 @@
-import { useState } from "react";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 import { projects, type Status } from "../data/portfolio";
 
 const statusStyle: Record<Status, string> = {
@@ -9,10 +9,8 @@ const statusStyle: Record<Status, string> = {
 };
 
 export default function Projects() {
-  const [showAll, setShowAll] = useState(false);
   const featured = projects.filter((p) => p.featured);
-  const rest = projects.filter((p) => !p.featured);
-  const displayedProjects = showAll ? rest : rest.slice(0, 3);
+  const displayedProjects = featured.slice(0, 4);
 
   return (
     <section id="projects" className="mx-auto max-w-container-max px-gutter md:px-xl py-xl">
@@ -22,9 +20,9 @@ export default function Projects() {
         </h2>
       </div>
 
-      {/* Featured Projects Grid */}
+      {/* Featured Projects Grid - Limited to 4 */}
       <div className="grid gap-md md:grid-cols-2 mb-xl reveal-on-scroll">
-        {featured.map((p, i) => (
+        {displayedProjects.map((p, i) => (
           <motion.div
             key={p.title}
             initial={{ opacity: 0, y: 20 }}
@@ -88,65 +86,15 @@ export default function Projects() {
         ))}
       </div>
 
-      {/* Archive Section */}
-      <div className="reveal-on-scroll">
-        <h3 className="font-headline-md text-headline-md text-on-surface mb-md">Archive</h3>
-        <div className="space-y-sm border border-outline-variant/30 rounded-2xl overflow-hidden bg-surface-container-lowest/50">
-          {displayedProjects.map((p, i) => (
-            <motion.a
-              key={p.title}
-              href={p.github}
-              target="_blank"
-              rel="noreferrer"
-              initial={{ opacity: 0, x: -10 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, margin: "-60px" }}
-              transition={{ duration: 0.3, delay: i * 0.05 }}
-              className="flex flex-col md:flex-row md:items-center md:justify-between gap-md px-lg py-md hover:bg-surface-container/50 transition-colors border-b border-outline-variant/20 last:border-b-0"
-            >
-              <div>
-                <h4 className="font-headline-md text-on-surface">{p.title}</h4>
-                <p className="text-on-surface-variant text-body-md">{p.period}</p>
-              </div>
-              <div className="flex flex-wrap gap-xs">
-                {p.stack.slice(0, 3).map((tech) => (
-                  <span
-                    key={tech}
-                    className="text-xs font-label-sm text-on-surface-variant"
-                  >
-                    {tech}
-                  </span>
-                ))}
-              </div>
-            </motion.a>
-          ))}
-        </div>
-      </div>
-
-      {/* Show More Button */}
-      {!showAll && rest.length > 3 && (
-        <div className="mt-lg text-center reveal-on-scroll">
-          <button
-            onClick={() => setShowAll(true)}
-            className="bg-primary text-on-primary px-8 py-4 rounded-full font-label-md flex items-center gap-xs hover:shadow-xl hover:-translate-y-1 transition-all mx-auto mb-md"
-          >
-            Show More Projects
-            <span className="material-symbols-outlined">add_circle</span>
-          </button>
-        </div>
-      )}
-
-      {/* View Full Archive Link */}
-      <div className="mt-md text-center reveal-on-scroll">
-        <a
-          href={`${projects[0]?.github?.split("/").slice(0, -1).join("/")}?tab=repositories`}
-          target="_blank"
-          rel="noreferrer"
-          className="inline-flex items-center gap-xs font-label-md text-primary hover:underline underline-offset-4"
+      {/* View All Projects Button */}
+      <div className="mt-xl text-center reveal-on-scroll">
+        <Link
+          to="/projects"
+          className="inline-flex items-center gap-xs font-label-md text-primary hover:underline underline-offset-4 bg-primary/10 px-6 py-3 rounded-full hover:bg-primary/20 transition-colors"
         >
-          View full archive on GitHub
-          <span className="material-symbols-outlined text-sm">link</span>
-        </a>
+          View All Projects
+          <span className="material-symbols-outlined text-sm">arrow_forward</span>
+        </Link>
       </div>
     </section>
   );

@@ -9,6 +9,7 @@ import Certifications from "./components/Certifications";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
 import CertificationDetail from "./components/CertificationDetail";
+import AllProjects from "./components/AllProjects";
 
 import { useEffect } from "react";
 
@@ -49,6 +50,7 @@ export default function App() {
         <main>
           <Routes>
             <Route path="/" element={<HomePage />} />
+            <Route path="/projects" element={<AllProjects />} />
             <Route path="/certifications/:category" element={<CertificationDetail />} />
           </Routes>
         </main>
