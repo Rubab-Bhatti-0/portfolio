@@ -95,6 +95,7 @@ export const certifications = [
     {
     name: "Advanced JavaScript 2: Async JS, APIs, Operators, Objects",
     issuer: "Scrimba",
+    category: "JavaScript",
     courseUrl: "https://www.coursera.org/account/accomplishments/records/BSBJ7QWD3TD5",
     verifyUrl: "",
   },
