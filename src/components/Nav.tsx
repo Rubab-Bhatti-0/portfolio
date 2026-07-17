@@ -1,20 +1,22 @@
 import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
+import { Link, useLocation } from "react-router-dom";
 import { profile } from "../data/portfolio";
 
 const links = [
-  { href: "#about", label: "About" },
-  { href: "#skills", label: "Skills" },
-  { href: "#experience", label: "Experience" },
-  { href: "#projects", label: "Projects" },
-  { href: "#certifications", label: "Certifications" },
-  { href: "#contact", label: "Contact" },
+  { href: "about", label: "About" },
+  { href: "skills", label: "Skills" },
+  { href: "experience", label: "Experience" },
+  { href: "projects", label: "Projects" },
+  { href: "certifications", label: "Certifications" },
+  { href: "contact", label: "Contact" },
 ];
 
 export default function Nav() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("");
+  const location = useLocation();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 50);
@@ -24,6 +26,7 @@ export default function Nav() {
 
   useEffect(() => {
     const handleSectionTracking = () => {
+      if (location.pathname !== "/") return;
       const sections = document.querySelectorAll("section");
       let current = "";
       sections.forEach((section) => {
@@ -44,7 +47,17 @@ export default function Nav() {
     window.addEventListener("scroll", handleSectionTracking);
     handleSectionTracking(); // Initial check
     return () => window.removeEventListener("scroll", handleSectionTracking);
-  }, []);
+  }, [location.pathname]);
+
+  const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    if (location.pathname === "/") {
+      e.preventDefault();
+      const element = document.getElementById(href);
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+  };
 
   return (
     <nav
@@ -56,28 +69,29 @@ export default function Nav() {
     >
       <div className="flex items-center justify-between w-full max-w-container-max mx-auto px-gutter md:px-xl h-20">
         <div className="flex justify-start">
-          <a
-            href="#"
+          <Link
+            to="/"
             className="font-display-lg text-display-lg-mobile md:text-display-lg tracking-tight text-on-surface font-bold shrink-0"
           >
             Rubab Bashir
-          </a>
+          </Link>
         </div>
 
         {/* Desktop Navigation Links - Middle */}
         <div className="hidden md:flex items-center justify-center gap-lg">
           {links.map((link) => (
-            <a
+            <Link
               key={link.href}
-              href={link.href}
+              to={`/#${link.href}`}
+              onClick={(e) => handleLinkClick(e, link.href)}
               className={`font-body-md text-body-md transition-colors nav-item relative whitespace-nowrap ${
-                activeSection === link.href.slice(1)
+                activeSection === link.href
                   ? "text-primary font-bold"
                   : "text-on-surface-variant hover:text-primary"
               }`}
             >
               {link.label}
-            </a>
+            </Link>
           ))}
         </div>
 
@@ -124,14 +138,17 @@ export default function Nav() {
       {mobileMenuOpen && (
         <div className="md:hidden absolute top-20 left-0 w-full bg-surface border-b border-outline-variant p-gutter flex flex-col gap-sm">
           {links.map((link) => (
-            <a
+            <Link
               key={link.href}
-              href={link.href}
+              to={`/#${link.href}`}
               className="text-on-surface-variant hover:text-primary transition-colors"
-              onClick={() => setMobileMenuOpen(false)}
+              onClick={(e) => {
+                setMobileMenuOpen(false);
+                handleLinkClick(e, link.href);
+              }}
             >
               {link.label}
-            </a>
+            </Link>
           ))}
           <div className="border-t border-outline-variant/30 pt-sm mt-sm">
             <a
