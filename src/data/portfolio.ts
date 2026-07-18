@@ -10,7 +10,7 @@ export const profile = {
     leetcode: "https://leetcode.com/u/RUBAB_BHATTI/", 
   },
   summary:
-    "Computer Science undergraduate at COMSATS University building scalable, database-driven web applications with the MERN stack, alongside practical experience in Machine Learning, Computer Vision, and data-driven application development. Currently expanding into Generative AI, LLMs, prompt engineering, and RAG.",
+    "Computer Science undergraduate at COMSATS University building scalable, database-driven web applications with the MERN stack, alongside practical experience in Machine Learning, and data-driven application development. Currently expanding into Generative AI, LLMs, prompt engineering, and RAG.",
   education: {
     degree: "Bachelor in Computer Science",
     school: "COMSATS University Islamabad, Lahore",
@@ -62,14 +62,14 @@ export const certifications = [
     issuer: "IBM",
     category: "Artificial Intelligence",
     courseUrl: "https://www.coursera.org/learn/introduction-to-ai",
-    verifyUrl: "",
+    verifyUrl: "https://www.coursera.org/account/accomplishments/records/RFXNLVE6D1U2",
   },
   {
     name: "Advanced JavaScript 1: Objects, Loops, Hoisting",
     issuer: "Scrimba / Coursera",
     category: "JavaScript",
     courseUrl: "https://www.coursera.org/learn/advanced-javascript-1-objects-loops-hoisting",
-    verifyUrl: "",
+    verifyUrl: "https://www.coursera.org/account/accomplishments/records/9GTS2072GJJX",
   },
   {
     name: "React Basics",
@@ -83,7 +83,7 @@ export const certifications = [
     issuer: "Anthropic",
     category: "Anthropic",
     courseUrl: "https://anthropic.skilljar.com/claude-code-in-action",
-    verifyUrl: "",
+    verifyUrl: "https://verify.skilljar.com/c/mkvsyemqqs87",
   },
     {
     name: "Al Fluency Framework & Foundations",
@@ -168,8 +168,8 @@ export const certifications = [
     name: "Advanced JavaScript 2: Async JS, APIs, Operators, Objects",
     issuer: "Scrimba",
     category: "JavaScript",
-    courseUrl: "https://www.coursera.org/account/accomplishments/records/BSBJ7QWD3TD5",
-    verifyUrl: "",
+    courseUrl: "",
+    verifyUrl: "https://www.coursera.org/account/accomplishments/records/BSBJ7QWD3TD5",
   },
 ];
 
@@ -226,7 +226,7 @@ export const projects = [
     stack: ["Python", "OpenCV", "Tkinter", "SQL Server", "Twilio API"],
     featured: true,
     status: "archived" as Status,
-    github: "ithub.com/Rubab-Bhatti-0/L.E.N.S.---License-Enforcement-Numberplate-Surveillance",
+    github: "https://github.com/Rubab-Bhatti-0/L.E.N.S.---License-Enforcement-Numberplate-Surveillance",
     live: "",
   },
   {
@@ -237,7 +237,7 @@ export const projects = [
     stack: ["Python", "Scikit-learn", "Pandas", "NumPy"],
     featured: false,
     status: "archived" as Status,
-    github: "https://github.com/Rubab-Bhatti-0",
+    github: "https://github.com/Rubab-Bhatti-0/DecodeLabs-Internship",
     live: "",
   },
   {
