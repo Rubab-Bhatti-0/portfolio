@@ -289,8 +289,19 @@ export const skillModules = [
     items: ["Node.js", "Express.js", "MongoDB", "Mongoose", "MySQL", "SQL Server", "REST APIs", "Socket.io"],
   },
   {
-    label: "AI & ML",
-    items: ["Scikit-learn", "Pandas", "NumPy", "OpenCV", "Model Evaluation", "Recommendation Systems"],
+   label: "AI & ML",
+items: [
+  "NumPy",
+  "Pandas",
+  "Matplotlib",
+  "Seaborn",
+  "Plotly",
+  "Cufflinks",
+  "Scikit-learn",
+  "OpenCV",
+  "Model Evaluation",
+  "Recommendation Systems"
+],
   },
   {
     label: "Auth & Security",
