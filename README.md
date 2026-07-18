@@ -50,3 +50,6 @@ src/
 
 Open `src/data/portfolio.ts` and add an object to the `projects` array -- the page updates automatically,
 no component code needs to change.
+
+
+
