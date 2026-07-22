@@ -259,6 +259,21 @@ export const certifications: Certification[] = [
     skills: ["Asynchronous JS", "REST APIs", "Modern JS Operators"],
     image: "/certificate_placeholder.png"
   },
+    {
+    name: "Supervised Machine Learning: Regression and Classification ",
+    issuer: "DeepLearning.AI, Stanford University",
+    category: "Machine Learning",
+    courseUrl: "",
+    verifyUrl: "https://www.coursera.org/account/accomplishments/records/8KZ2QOJ6MTAY",
+    date: "06/2026",
+    description: "Deep dive into async control flow, Promises, async/await, REST API integration, destructuring, and ES6+ operators.",
+    skills: ["Supervised Machine Learning",
+    "Linear & Logistic Regression",
+    "Classification Algorithms",
+    "Model Evaluation & Regularization"],
+    image: "/certificate_placeholder.png"
+  },
+
 ];
 
 export const projects: Project[] = [
