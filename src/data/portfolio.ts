@@ -20,6 +20,20 @@ export const profile = {
 
 export type Status = "live" | "internal" | "archived";
 
+export interface Project {
+  title: string;
+  period: string;
+  description: string;
+  stack: string[];
+  featured: boolean;
+  status: Status;
+  github: string;
+  live: string;
+  category?: string;
+  bullets?: string[];
+  summary?: string;
+}
+
 export const experience = [
   {
     role: "Machine Learning Engineering Intern",
@@ -173,39 +187,66 @@ export const certifications = [
   },
 ];
 
-export const projects = [
+export const projects: Project[] = [
   {
     title: "Smart Community Service & Local Marketplace",
     period: "07/2026",
     description:
-      "Full-stack marketplace where users buy/sell products, offer services, and book appointments with local providers. JWT auth with role-based access, real-time chat via Socket.io, a booking request-accept-reject-complete workflow, and search/filter/pagination across listings.",
+      "Full-stack marketplace where users buy/sell products, offer services, and book appointments with local providers.",
     stack: ["React", "Node.js", "Express", "MongoDB", "JWT", "Socket.io", "Cloudinary"],
     featured: true,
-    status: "live" as Status,
+    status: "live",
     github: "https://github.com/Rubab-Bhatti-0/Smart-Community-Service-Local-Marketplace-Platform",
     live: "",
+    category: "WEB DEVELOPMENT",
+    bullets: [
+      "JWT auth with role-based access for buyers, sellers, and admins",
+      "Real-time chat functionality using Socket.io for instant communication",
+      "Comprehensive booking workflow: request, accept, reject, and complete",
+      "Advanced search, filtering, and pagination across all service listings",
+      "Cloudinary integration for seamless image uploads and management"
+    ],
+    summary: "A robust multi-vendor ecosystem bridging local service providers with community needs."
   },
   {
     title: "FlexiBerry",
     period: "02/2026 — 04/2026",
     description:
-      "Multi-vendor installment marketplace with role-based dashboards for buyers, sellers, and admins, flexible payment plans, dynamic vendor storefronts, and full order management.",
+      "Multi-vendor installment marketplace with flexible payment plans and dynamic storefronts.",
     stack: ["Next.js 16", "TypeScript", "TailwindCSS", "Radix UI"],
     featured: true,
-    status: "live" as Status,
+    status: "live",
     github: "https://github.com/Rubab-Bhatti-0/FlexiBerry_platform",
     live: "https://v0-flexi-berry-e-commerce-platform-teal.vercel.app/",
+    category: "E-COMMERCE",
+    bullets: [
+      "Developed role-based dashboards for buyers, sellers, and administrators",
+      "Implemented flexible installment payment plans for improved accessibility",
+      "Designed dynamic vendor storefronts with customizable branding",
+      "Engineered a full order management system with real-time tracking",
+      "Built with Next.js 16 for optimized performance and SEO"
+    ],
+    summary: "Empowering commerce through flexible financial solutions and scalable multi-vendor architecture."
   },
   {
     title: "ServiceHub",
     period: "06/2026",
     description:
-      "Multi-vendor freelancer/service marketplace with JWT auth, role-based access control, and end-to-end project tracking.",
+      "Multi-vendor freelancer/service marketplace with end-to-end project tracking.",
     stack: ["React", "Node.js", "Express", "MongoDB", "JWT"],
     featured: true,
-    status: "live" as Status,
+    status: "live",
     github: "https://github.com/Rubab-Bhatti-0",
     live: "",
+    category: "WEB DEVELOPMENT",
+    bullets: [
+      "Secure JWT authentication and role-based access control (RBAC)",
+      "End-to-end project tracking from initial proposal to final delivery",
+      "Integrated messaging system for seamless freelancer-client collaboration",
+      "Responsive UI designed for both desktop and mobile accessibility",
+      "Scalable backend architecture to handle concurrent service requests"
+    ],
+    summary: "Connecting skilled freelancers with clients through a secure and transparent tracking platform."
   },
   {
     title: "Vendor Management & Quotation System",
@@ -219,15 +260,24 @@ export const projects = [
     live: "",
   },
   {
-    title: "L.E.N.S. — License Enforcement Numberplate Surveillance",
+    title: "L.E.N.S.",
     period: "11/2025 — 12/2025",
     description:
-      "AI-based traffic monitoring system detecting red-light violations, overspeeding, wrong-way driving, and illegal parking. OpenCV for vehicle tracking and plate recognition, SQL Server for violation logging, Twilio API for automated SMS alerts.",
+      "AI-based traffic monitoring system for license enforcement and surveillance.",
     stack: ["Python", "OpenCV", "Tkinter", "SQL Server", "Twilio API"],
     featured: true,
-    status: "archived" as Status,
+    status: "archived",
     github: "https://github.com/Rubab-Bhatti-0/L.E.N.S.---License-Enforcement-Numberplate-Surveillance",
     live: "",
+    category: "AI & COMPUTER VISION",
+    bullets: [
+      "Detected red-light violations, overspeeding, and wrong-way driving in real-time",
+      "Utilized OpenCV for high-accuracy vehicle tracking and plate recognition",
+      "Integrated SQL Server for robust logging and historical violation analysis",
+      "Automated SMS alerts for immediate violation notification via Twilio API",
+      "Designed a functional GUI using Tkinter for system monitoring"
+    ],
+    summary: "Enhancing road safety through automated, intelligent traffic enforcement and real-time surveillance."
   },
   {
     title: "AI Internship Projects",

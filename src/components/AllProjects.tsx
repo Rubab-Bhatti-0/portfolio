@@ -1,6 +1,8 @@
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { projects, type Status } from "../data/portfolio";
+import { projects, type Status, type Project } from "../data/portfolio";
+import ProjectModal from "./ProjectModal";
 
 const statusStyle: Record<Status, string> = {
   live: "text-primary border-primary/40",
@@ -9,8 +11,15 @@ const statusStyle: Record<Status, string> = {
 };
 
 export default function AllProjects() {
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+
   return (
     <div className="min-h-screen bg-background py-20">
+      <ProjectModal
+        project={selectedProject}
+        isOpen={!!selectedProject}
+        onClose={() => setSelectedProject(null)}
+      />
       <div className="max-w-container-max mx-auto px-gutter md:px-xl">
         <Link 
           to="/" 
@@ -33,10 +42,11 @@ export default function AllProjects() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-60px" }}
               transition={{ duration: 0.45, delay: i * 0.06 }}
-              className="group bg-surface-container-lowest rounded-2xl overflow-hidden border border-outline-variant/30 hover:shadow-2xl transition-all"
+              className="group bg-surface-container-lowest rounded-2xl overflow-hidden border border-outline-variant/30 hover:shadow-2xl transition-all cursor-pointer"
+              onClick={() => setSelectedProject(p)}
             >
               <div className="aspect-video overflow-hidden bg-surface-container">
-                <div className="w-full h-full bg-gradient-to-br from-primary/20 to-tertiary/20 flex items-center justify-center">
+                <div className="w-full h-full bg-gradient-to-br from-primary/20 to-tertiary/20 flex items-center justify-center transition-transform duration-500 group-hover:scale-110">
                   <span className="material-symbols-outlined text-primary text-6xl opacity-20">
                     {p.status === "live" ? "check_circle" : "archive"}
                   </span>
@@ -44,16 +54,16 @@ export default function AllProjects() {
               </div>
               <div className="p-lg">
                 <div className="flex justify-between items-start mb-sm">
-                  <h3 className="font-headline-md text-headline-md text-on-surface">{p.title}</h3>
+                  <h3 className="font-headline-md text-headline-md text-on-surface group-hover:text-primary transition-colors">{p.title}</h3>
                   <span
                     className={`text-xs font-label-sm border rounded-full px-3 py-1 uppercase tracking-wider ${statusStyle[p.status]}`}
                   >
                     {p.status}
                   </span>
                 </div>
-                <p className="text-on-surface-variant mb-md text-body-md">{p.description}</p>
+                <p className="text-on-surface-variant mb-md text-body-md line-clamp-2">{p.description}</p>
                 <div className="flex flex-wrap gap-xs mb-md">
-                  {p.stack.map((tech) => (
+                  {p.stack.slice(0, 3).map((tech) => (
                     <span
                       key={tech}
                       className="text-xs font-label-sm bg-surface-container px-2 py-1 rounded text-on-surface"
@@ -61,28 +71,13 @@ export default function AllProjects() {
                       {tech}
                     </span>
                   ))}
-                </div>
-                <div className="flex gap-md border-t border-outline-variant/30 pt-md">
-                  <a
-                    href={p.github}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="flex items-center gap-xs text-primary hover:text-primary/80 transition-colors font-label-md"
-                  >
-                    <span className="material-symbols-outlined text-sm">code</span>
-                    GitHub
-                  </a>
-                  {p.live && (
-                    <a
-                      href={p.live}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="flex items-center gap-xs text-primary hover:text-primary/80 transition-colors font-label-md"
-                    >
-                      <span className="material-symbols-outlined text-sm">north_east</span>
-                      Live
-                    </a>
+                  {p.stack.length > 3 && (
+                    <span className="text-xs font-label-sm text-on-surface-variant">+{p.stack.length - 3} more</span>
                   )}
+                </div>
+                <div className="flex items-center gap-xs text-primary font-label-md group-hover:gap-sm transition-all">
+                  View Details
+                  <span className="material-symbols-outlined text-sm">arrow_forward</span>
                 </div>
               </div>
             </motion.div>
