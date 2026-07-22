@@ -18,6 +18,21 @@ export default function Nav() {
   const [activeSection, setActiveSection] = useState("");
   const location = useLocation();
 
+  const [isDarkMode, setIsDarkMode] = useState(() => {
+    return document.documentElement.classList.contains("dark") || localStorage.getItem("theme") === "dark";
+  });
+
+  useEffect(() => {
+    const root = document.documentElement;
+    if (isDarkMode) {
+      root.classList.add("dark");
+      localStorage.setItem("theme", "dark");
+    } else {
+      root.classList.remove("dark");
+      localStorage.setItem("theme", "light");
+    }
+  }, [isDarkMode]);
+
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 50);
     window.addEventListener("scroll", onScroll);
@@ -95,8 +110,20 @@ export default function Nav() {
           ))}
         </div>
 
-        {/* Desktop Resume Button - Right */}
-        <div className="hidden md:flex items-center justify-end">
+        {/* Desktop Controls - Right */}
+        <div className="hidden md:flex items-center justify-end gap-md">
+          {/* Theme Toggle */}
+          <button
+            onClick={() => setIsDarkMode(!isDarkMode)}
+            className="w-10 h-10 rounded-full flex items-center justify-center text-on-surface hover:bg-surface-container-high transition-all cursor-pointer border border-outline-variant/30"
+            aria-label="Toggle theme"
+          >
+            <span className="material-symbols-outlined text-xl select-none">
+              {isDarkMode ? "light_mode" : "dark_mode"}
+            </span>
+          </button>
+
+          {/* Resume Button */}
           <div className="relative group">
             <button className="bg-primary text-on-primary px-6 py-2 rounded-full font-label-md hover:shadow-lg hover:-translate-y-0.5 active:scale-95 transition-all flex items-center gap-xs whitespace-nowrap">
               Resume
@@ -123,10 +150,22 @@ export default function Nav() {
           </div>
         </div>
 
-        {/* Mobile Menu Button */}
-        <div className="md:hidden flex justify-end">
+        {/* Mobile Controls - Right */}
+        <div className="md:hidden flex items-center gap-sm">
+          {/* Theme Toggle */}
           <button
-            className="text-on-surface"
+            onClick={() => setIsDarkMode(!isDarkMode)}
+            className="w-10 h-10 rounded-full flex items-center justify-center text-on-surface hover:bg-surface-container-high transition-all border border-outline-variant/20"
+            aria-label="Toggle theme"
+          >
+            <span className="material-symbols-outlined text-xl select-none">
+              {isDarkMode ? "light_mode" : "dark_mode"}
+            </span>
+          </button>
+
+          {/* Mobile Menu Button */}
+          <button
+            className="text-on-surface p-1"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           >
             {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}

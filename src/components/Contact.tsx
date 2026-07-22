@@ -100,7 +100,7 @@ export default function Contact() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-60px" }}
             transition={{ duration: 0.5, delay: 0.1 }}
-            className="glass-card p-lg rounded-2xl reveal-on-scroll"
+            className="glass-card p-lg rounded-2xl reveal-on-scroll lightning-glow"
             style={{ transitionDelay: "200ms" }}
           >
             <form onSubmit={handleSubmit} className="space-y-md">

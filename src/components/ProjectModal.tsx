@@ -30,7 +30,7 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
               initial={{ opacity: 0, scale: 0.9, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.9, y: 20 }}
-              className="w-full max-w-2xl bg-surface-container-lowest border border-outline-variant/30 rounded-3xl overflow-hidden shadow-2xl pointer-events-auto relative"
+              className="w-full max-w-2xl bg-surface-container-lowest border border-outline-variant/30 rounded-3xl overflow-hidden shadow-2xl pointer-events-auto relative lightning-glow"
             >
               {/* Close Button */}
               <button

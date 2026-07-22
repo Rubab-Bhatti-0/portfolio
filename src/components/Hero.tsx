@@ -64,7 +64,7 @@ export default function Hero() {
           className="reveal-on-scroll active"
           style={{ transitionDelay: "200ms" }}
         >
-          <div className="glass-card p-lg rounded-2xl border border-outline-variant/30">
+          <div className="glass-card p-lg rounded-2xl border border-outline-variant/30 lightning-glow">
             <div className="space-y-md">
               <div>
                 <p className="text-outline font-label-sm uppercase tracking-wider text-on-surface-variant">

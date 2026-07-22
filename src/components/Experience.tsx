@@ -21,7 +21,7 @@ export default function Experience() {
             className="relative"
           >
             <span className="absolute -left-[1.65rem] top-2 h-3 w-3 rounded-full bg-primary border-2 border-background" />
-            <div className="glass-card p-lg rounded-2xl border border-outline-variant/30 hover:shadow-lg transition-all">
+            <div className={`glass-card p-lg rounded-2xl border border-outline-variant/30 hover:shadow-lg transition-all ${role.status === "running" ? "lightning-glow" : ""}`}>
               <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-md mb-md">
                 <div>
                   <h3 className="font-headline-md text-on-surface">

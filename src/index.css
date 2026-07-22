@@ -2,53 +2,98 @@
 @import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap');
 @import "tailwindcss";
 
+:root {
+  --background: #fcf8ff;
+  --on-surface: #181445;
+  --surface: #fcf8ff;
+  --surface-container-lowest: #ffffff;
+  --surface-container-low: #f6f2ff;
+  --surface-container: #efebff;
+  --surface-container-high: #e9e5ff;
+  --surface-container-highest: #e3dfff;
+  --on-surface-variant: #464555;
+  --outline: #777587;
+  --outline-variant: #c7c4d8;
+  --primary: #3525cd;
+  --on-primary: #ffffff;
+  --primary-container: #4f46e5;
+  --on-primary-container: #dad7ff;
+  --secondary: #9d4300;
+  --on-secondary: #ffffff;
+  --tertiary: #313ba4;
+  --on-tertiary: #ffffff;
+}
+
+/* Elegant & Professional Dark Mode Theme */
+.dark {
+  --background: #070414; /* deep galaxy black-purple */
+  --on-surface: #f5f3ff; /* soft white-lavender */
+  --surface: #0c0821; /* rich dark violet */
+  --surface-container-lowest: #100b2a; /* deep card backgrounds */
+  --surface-container-low: #150f36;
+  --surface-container: #1b1444;
+  --surface-container-high: #221a52;
+  --surface-container-highest: #2a2162;
+  --on-surface-variant: #aca5cd; /* light muted purple for description texts */
+  --outline: #776e9c;
+  --outline-variant: #3e3660;
+  --primary: #9d8eff; /* bright, gorgeous neon violet-indigo */
+  --on-primary: #070046;
+  --primary-container: #3525cd;
+  --on-primary-container: #e6e3ff;
+  --secondary: #ff8b3d; /* glowing sunset orange for secondary alerts */
+  --on-secondary: #341100;
+  --tertiary: #bdc2ff;
+  --on-tertiary: #000767;
+}
+
 @theme {
-  --color-on-surface: #181445;
-  --color-surface-container: #efebff;
+  --color-on-surface: var(--on-surface);
+  --color-surface-container: var(--surface-container);
   --color-tertiary-fixed-dim: #bdc2ff;
-  --color-surface-container-low: #f6f2ff;
+  --color-surface-container-low: var(--surface-container-low);
   --color-tertiary-fixed: #e0e0ff;
   --color-on-secondary-container: #5c2400;
-  --color-on-primary-container: #dad7ff;
-  --color-on-surface-variant: #464555;
-  --color-surface-bright: #fcf8ff;
+  --color-on-primary-container: var(--on-primary-container);
+  --color-on-surface-variant: var(--on-surface-variant);
+  --color-surface-bright: var(--background);
   --color-secondary-fixed: #ffdbca;
   --color-secondary-fixed-dim: #ffb690;
   --color-error-container: #ffdad6;
-  --color-surface-container-lowest: #ffffff;
-  --color-surface-variant: #e3dfff;
-  --color-secondary-container: #fd761a;
+  --color-surface-container-lowest: var(--surface-container-lowest);
+  --color-surface-variant: var(--outline-variant);
+  --color-secondary-container: var(--secondary);
   --color-on-secondary-fixed: #341100;
-  --color-surface-dim: #dad6ff;
+  --color-surface-dim: var(--outline-variant);
   --color-on-tertiary-container: #d7d8ff;
-  --color-background: #fcf8ff;
-  --color-tertiary: #313ba4;
-  --color-surface-container-high: #e9e5ff;
-  --color-on-secondary: #ffffff;
+  --color-background: var(--background);
+  --color-tertiary: var(--tertiary);
+  --color-surface-container-high: var(--surface-container-high);
+  --color-on-secondary: var(--on-secondary);
   --color-on-tertiary-fixed-variant: #2f3aa3;
-  --color-surface-container-highest: #e3dfff;
+  --color-surface-container-highest: var(--surface-container-highest);
   --color-on-secondary-fixed-variant: #783200;
-  --color-outline-variant: #c7c4d8;
+  --color-outline-variant: var(--outline-variant);
   --color-inverse-primary: #c3c0ff;
   --color-error: #ba1a1a;
   --color-primary-fixed-dim: #c3c0ff;
   --color-on-primary-fixed-variant: #3323cc;
-  --color-on-primary: #ffffff;
+  --color-on-primary: var(--on-primary);
   --color-on-tertiary-fixed: #000767;
-  --color-on-background: #181445;
-  --color-surface: #fcf8ff;
+  --color-on-background: var(--on-surface);
+  --color-surface: var(--surface);
   --color-inverse-on-surface: #f3eeff;
-  --color-on-tertiary: #ffffff;
-  --color-primary: #3525cd;
-  --color-outline: #777587;
+  --color-on-tertiary: var(--on-tertiary);
+  --color-primary: var(--primary);
+  --color-outline: var(--outline);
   --color-on-error-container: #93000a;
-  --color-tertiary-container: #4a55be;
-  --color-primary-container: #4f46e5;
-  --color-secondary: #9d4300;
+  --color-tertiary-container: var(--tertiary);
+  --color-primary-container: var(--primary-container);
+  --color-secondary: var(--secondary);
   --color-inverse-surface: #2d2a5b;
   --color-primary-fixed: #e2dfff;
   --color-on-primary-fixed: #0f0069;
-  --color-surface-tint: #4d44e3;
+  --color-surface-tint: var(--primary);
   --color-on-error: #ffffff;
 
   /* Custom Spacing */
@@ -123,6 +168,7 @@ body {
   font-family: "DM Sans", sans-serif;
   @apply selection:bg-primary-container selection:text-on-primary-container;
   overflow-x: hidden;
+  transition: background-color 0.3s, color 0.3s;
 }
 
 /* Remove default scrollbar */
@@ -135,13 +181,58 @@ body {
   scrollbar-width: none;  /* Firefox */
 }
 
+@keyframes borderPulse {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(53, 37, 205, 0.15), inset 0 0 8px rgba(53, 37, 205, 0.05);
+    border-color: rgba(53, 37, 205, 0.35);
+  }
+  50% {
+    box-shadow: 0 0 35px rgba(53, 37, 205, 0.3), inset 0 0 15px rgba(53, 37, 205, 0.1);
+    border-color: rgba(53, 37, 205, 0.55);
+  }
+}
+
+@keyframes borderPulseDark {
+  0%, 100% {
+    box-shadow: 0 0 25px rgba(157, 142, 255, 0.2), inset 0 0 10px rgba(157, 142, 255, 0.08);
+    border-color: rgba(157, 142, 255, 0.45);
+  }
+  50% {
+    box-shadow: 0 0 45px rgba(157, 142, 255, 0.45), inset 0 0 20px rgba(157, 142, 255, 0.2);
+    border-color: rgba(157, 142, 255, 0.7);
+  }
+}
+
 @layer components {
+  /* Lightning Glow Highlighting Class */
+  .lightning-glow {
+    animation: borderPulse 4s infinite ease-in-out;
+    transition: border-color 0.3s, box-shadow 0.3s, background-color 0.3s !important;
+  }
+
+  .lightning-glow:hover {
+    box-shadow: 0 0 40px rgba(53, 37, 205, 0.35), inset 0 0 15px rgba(53, 37, 205, 0.1) !important;
+    border-color: rgba(53, 37, 205, 0.6) !important;
+    animation: none;
+  }
+
+  .dark .lightning-glow {
+    animation: borderPulseDark 4s infinite ease-in-out;
+    transition: border-color 0.3s, box-shadow 0.3s, background-color 0.3s !important;
+  }
+
+  .dark .lightning-glow:hover {
+    box-shadow: 0 0 50px rgba(157, 142, 255, 0.55), inset 0 0 25px rgba(157, 142, 255, 0.25) !important;
+    border-color: rgba(157, 142, 255, 0.8) !important;
+    animation: none;
+  }
+
   .glass-card {
-    @apply bg-white/70 backdrop-blur-md border border-slate-200/50;
+    @apply bg-white/70 dark:bg-slate-950/60 backdrop-blur-md border border-slate-200/30 dark:border-slate-800/40;
+    transition: background-color 0.3s, border-color 0.3s;
   }
 
   .reveal-on-scroll {
-    /* Temporarily disabling opacity-0 to ensure visibility while debugging scroll triggers */
     @apply translate-y-[30px] transition-all duration-[800ms];
     transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
   }

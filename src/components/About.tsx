@@ -18,7 +18,7 @@ export default function About() {
           <p className="font-body-lg text-body-lg text-on-surface-variant mb-lg leading-relaxed break-words whitespace-normal h-auto text-left">
             {profile.summary}
           </p>
-          <div className="glass-card p-lg rounded-2xl border border-outline-variant/30">
+          <div className="glass-card p-lg rounded-2xl border border-outline-variant/30 lightning-glow">
             <p className="font-label-md text-primary uppercase tracking-wider mb-base">
               Education
             </p>

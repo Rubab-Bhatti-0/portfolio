@@ -29,7 +29,7 @@ export default function CertificateModal({ certification, isOpen, onClose }: Cer
               initial={{ opacity: 0, scale: 0.9, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.9, y: 20 }}
-              className="w-full max-w-3xl bg-surface-container-lowest border border-outline-variant/30 rounded-3xl overflow-hidden shadow-2xl pointer-events-auto relative max-h-[90vh] flex flex-col"
+              className="w-full max-w-3xl bg-surface-container-lowest border border-outline-variant/30 rounded-3xl overflow-hidden shadow-2xl pointer-events-auto relative max-h-[90vh] flex flex-col lightning-glow"
             >
               {/* Close Button */}
               <button
