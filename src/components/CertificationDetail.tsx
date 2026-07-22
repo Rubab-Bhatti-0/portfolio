@@ -1,9 +1,12 @@
 import { useParams, Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { certifications } from "../data/portfolio";
+import { useState } from "react";
+import { certifications, type Certification } from "../data/portfolio";
+import CertificateModal from "./CertificateModal";
 
 export default function CertificationDetail() {
   const { category } = useParams<{ category: string }>();
+  const [selectedCert, setSelectedCert] = useState<Certification | null>(null);
   
   const filteredCerts = certifications.filter(
     (cert) => cert.category.toLowerCase() === category?.toLowerCase()
@@ -19,6 +22,12 @@ export default function CertificationDetail() {
 
   return (
     <div className="min-h-screen bg-background py-20">
+      <CertificateModal
+        certification={selectedCert}
+        isOpen={!!selectedCert}
+        onClose={() => setSelectedCert(null)}
+      />
+      
       <div className="max-w-container-max mx-auto px-gutter md:px-xl">
         <Link 
           to="/" 
@@ -34,28 +43,69 @@ export default function CertificationDetail() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-md">
           {filteredCerts.map((cert, i) => (
-            <motion.a
+            <motion.div
               key={cert.name}
-              href={cert.verifyUrl || cert.courseUrl}
-              target="_blank"
-              rel="noreferrer"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, delay: i * 0.1 }}
-              className="glass-card p-lg rounded-2xl flex items-center gap-md border border-outline-variant/30 hover:shadow-lg hover:border-primary/50 transition-all group"
+              transition={{ duration: 0.4, delay: i * 0.08 }}
+              className="glass-card p-6 rounded-2xl flex flex-col justify-between border border-outline-variant/30 hover:shadow-lg hover:border-primary/50 transition-all group cursor-pointer h-full"
+              onClick={() => setSelectedCert(cert)}
             >
-              <div className="w-12 h-12 rounded-lg bg-primary/10 text-primary flex items-center justify-center shrink-0 group-hover:bg-primary/20 transition-colors">
-                <span className="material-symbols-outlined">{getIcon(cert.issuer)}</span>
-              </div>
               <div>
-                <h3 className="font-headline-md text-body-lg font-bold text-on-surface group-hover:text-primary transition-colors">
-                  {cert.name}
-                </h3>
-                <p className="text-outline font-label-sm uppercase tracking-wider text-on-surface-variant">
-                  {cert.issuer}
-                </p>
+                {/* Header Icon + Info */}
+                <div className="flex items-start gap-4 mb-4">
+                  <div className="w-12 h-12 rounded-lg bg-primary/10 text-primary flex items-center justify-center shrink-0 group-hover:bg-primary/20 transition-colors">
+                    <span className="material-symbols-outlined text-2xl">{getIcon(cert.issuer)}</span>
+                  </div>
+                  <div>
+                    <h3 className="font-headline-md text-lg font-bold text-on-surface group-hover:text-primary transition-colors leading-snug line-clamp-2">
+                      {cert.name}
+                    </h3>
+                    <div className="flex flex-wrap items-center gap-1.5 mt-1 text-[10px] font-bold tracking-wider text-on-surface-variant/70 uppercase">
+                      <span>{cert.issuer}</span>
+                      {cert.date && (
+                        <>
+                          <span className="w-1 h-1 rounded-full bg-outline-variant" />
+                          <span>{cert.date}</span>
+                        </>
+                      )}
+                    </div>
+                  </div>
+                </div>
+
+                {/* Description */}
+                {cert.description && (
+                  <p className="text-on-surface-variant text-sm mb-4 line-clamp-2 leading-relaxed">
+                    {cert.description}
+                  </p>
+                )}
               </div>
-            </motion.a>
+
+              {/* Skills Tags & Footer */}
+              <div className="mt-auto pt-3 border-t border-outline-variant/10">
+                {cert.skills && cert.skills.length > 0 && (
+                  <div className="flex flex-wrap gap-1.5 mb-4">
+                    {cert.skills.slice(0, 3).map((skill) => (
+                      <span
+                        key={skill}
+                        className="text-[10px] font-semibold bg-surface-container/60 px-2 py-0.5 rounded text-on-surface-variant"
+                      >
+                        {skill}
+                      </span>
+                    ))}
+                    {cert.skills.length > 3 && (
+                      <span className="text-[10px] font-semibold text-outline">
+                        +{cert.skills.length - 3} more
+                      </span>
+                    )}
+                  </div>
+                )}
+                
+                <div className="text-primary font-label-sm uppercase tracking-wider group-hover:translate-x-1 transition-transform flex items-center gap-1 text-xs">
+                  View Certificate <span className="material-symbols-outlined text-sm">arrow_forward</span>
+                </div>
+              </div>
+            </motion.div>
           ))}
         </div>
       </div>

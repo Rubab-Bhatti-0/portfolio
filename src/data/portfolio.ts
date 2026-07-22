@@ -34,6 +34,18 @@ export interface Project {
   summary?: string;
 }
 
+export interface Certification {
+  name: string;
+  issuer: string;
+  category: string;
+  courseUrl: string;
+  verifyUrl: string;
+  date?: string;
+  description?: string;
+  skills?: string[];
+  image?: string;
+}
+
 export const experience = [
   {
     role: "Machine Learning Engineering Intern",
@@ -70,13 +82,17 @@ export const experience = [
 ];
 
 
-export const certifications = [
+export const certifications: Certification[] = [
   {
     name: "Introduction to Artificial Intelligence",
     issuer: "IBM",
     category: "Artificial Intelligence",
     courseUrl: "https://www.coursera.org/learn/introduction-to-ai",
     verifyUrl: "https://www.coursera.org/account/accomplishments/records/RFXNLVE6D1U2",
+    date: "06/2026",
+    description: "Explores foundational concepts of AI, applications, machine learning, deep learning, neural networks, and ethical considerations.",
+    skills: ["Artificial Intelligence", "Machine Learning", "AI Ethics"],
+    image: "/certificate_placeholder.png"
   },
   {
     name: "Advanced JavaScript 1: Objects, Loops, Hoisting",
@@ -84,6 +100,10 @@ export const certifications = [
     category: "JavaScript",
     courseUrl: "https://www.coursera.org/learn/advanced-javascript-1-objects-loops-hoisting",
     verifyUrl: "https://www.coursera.org/account/accomplishments/records/9GTS2072GJJX",
+    date: "05/2026",
+    description: "Deep dive into JS core concepts, execution contexts, scope chains, hoisting, closures, objects, prototypes, and loops.",
+    skills: ["JavaScript", "ES6+", "Programming Fundamentals"],
+    image: "/certificate_placeholder.png"
   },
   {
     name: "React Basics",
@@ -91,6 +111,10 @@ export const certifications = [
     category: "Web Development",
     courseUrl: "https://www.coursera.org/learn/react-basics",
     verifyUrl: "https://www.coursera.org/account/accomplishments/records/G24NB0IVMINM",
+    date: "04/2026",
+    description: "React fundamentals: components, props, state, event handling, hooks, list rendering, and routing for modern web apps.",
+    skills: ["React.js", "Frontend Development", "Component Architecture"],
+    image: "/certificate_placeholder.png"
   },
   {
     name: "Claude Code in Action",
@@ -98,92 +122,142 @@ export const certifications = [
     category: "Anthropic",
     courseUrl: "https://anthropic.skilljar.com/claude-code-in-action",
     verifyUrl: "https://verify.skilljar.com/c/mkvsyemqqs87",
+    date: "07/2026",
+    description: "Using Anthropic's Claude Code CLI for software engineering tasks, test execution, debugging, and terminal automation.",
+    skills: ["Claude Code", "AI Coding Tools", "Anthropic API"],
+    image: "/certificate_placeholder.png"
   },
-    {
-    name: "Al Fluency Framework & Foundations",
+  {
+    name: "AI Fluency Framework & Foundations",
     issuer: "Anthropic",
     category: "Anthropic",
     courseUrl: "https://anthropic.skilljar.com",
     verifyUrl: "https://verify.skilljar.com/c/ixogudy7aqdd",
+    date: "07/2026",
+    description: "Foundational concepts of Large Language Models, prompt engineering techniques, and utilizing Claude for workflows.",
+    skills: ["Generative AI", "Large Language Models", "Prompt Engineering"],
+    image: "/certificate_placeholder.png"
   },
-    {
+  {
     name: "Building with the Claude API",
     issuer: "Anthropic",
     category: "Anthropic",
     courseUrl: "https://anthropic.skilljar.com/claude-code-in-action",
     verifyUrl: "https://verify.skilljar.com/c/scnwgk7zvhkw",
+    date: "07/2026",
+    description: "Integrating Claude API into applications, managing context windows, structuring JSON outputs, and Retrieval-Augmented Generation.",
+    skills: ["Claude API", "Python", "API Integration"],
+    image: "/certificate_placeholder.png"
   },
-    {
+  {
     name: "Claude code 101",
     issuer: "Anthropic",
     category: "Anthropic",
     courseUrl: "https://anthropic.skilljar.com/claude-code-in-action",
     verifyUrl: "https://verify.skilljar.com/c/oicbqhhi3x2o",
-  },
-    {
-    name: "Claude Platform 101",
-    issuer: "Anthropic",
-    category: "Anthropic",
-    courseUrl: "https://anthropic.skilljar.com/claude-platform-101",
-    verifyUrl: "https://verify.skilljar.com/c/mcg6k6yznz7m",
-  },
-    {
-    name: "Claude in Amazon Bedrock",
-    issuer: "Anthropic",
-    category: "Anthropic",
-    courseUrl: "https://anthropic.skilljar.com/claude-code-in-action",
-    verifyUrl: "https://verify.skilljar.com/c/owmza9d9zkwk",
+    date: "07/2026",
+    description: "Introduction to Claude Code capabilities, command-line syntax, system tools, and agentic workspace navigation.",
+    skills: ["Claude Code", "Software Engineering", "Agentic Systems"],
+    image: "/certificate_placeholder.png"
   },
   {
     name: "Claude Platform 101",
     issuer: "Anthropic",
     category: "Anthropic",
     courseUrl: "https://anthropic.skilljar.com/claude-platform-101",
-    verifyUrl: "",
+    verifyUrl: "https://verify.skilljar.com/c/mcg6k6yznz7m",
+    date: "07/2026",
+    description: "Overview of Anthropic Console, API key management, Model Playground, and system instructions optimization.",
+    skills: ["Anthropic Console", "API Keys", "System Prompts"],
+    image: "/certificate_placeholder.png"
   },
-    {
+  {
+    name: "Claude in Amazon Bedrock",
+    issuer: "Anthropic",
+    category: "Anthropic",
+    courseUrl: "https://anthropic.skilljar.com/claude-code-in-action",
+    verifyUrl: "https://verify.skilljar.com/c/owmza9d9zkwk",
+    date: "07/2026",
+    description: "Deploying and scaling Claude models via Amazon Bedrock, configuring IAM permissions, and optimizing request latency.",
+    skills: ["Amazon Bedrock", "AWS", "Cloud Deployment"],
+    image: "/certificate_placeholder.png"
+  },
+  {
+    name: "Claude Platform 101 (Duplicate)",
+    issuer: "Anthropic",
+    category: "Anthropic",
+    courseUrl: "https://anthropic.skilljar.com/claude-platform-101",
+    verifyUrl: "",
+    date: "07/2026",
+    description: "Additional platform workflows, dashboard tracking, and usage analytics settings inside the developer console.",
+    skills: ["Anthropic Console", "Developer Tools"],
+    image: "/certificate_placeholder.png"
+  },
+  {
     name: "Claude with Google Cloud's Vertex AI",
     issuer: "Anthropic",
     category: "Anthropic",
     courseUrl: "https://anthropic.skilljar.com/Claude with Google Cloud's Vertex AI",
     verifyUrl: "https://verify.skilljar.com/c/kedynzin6qiq",
+    date: "07/2026",
+    description: "Hosting and evaluating Claude models inside GCP Vertex AI, managing service accounts, and enterprise AI safety.",
+    skills: ["Google Cloud Platform", "Vertex AI", "Enterprise AI"],
+    image: "/certificate_placeholder.png"
   },
-    {
+  {
     name: "Introduction to Model Context Protocol",
     issuer: "Anthropic",
     category: "Anthropic",
     courseUrl: "https://anthropic.skilljar.com/claude-platform-101",
     verifyUrl: "https://verify.skilljar.com/c/qq7rzjf4kmz2",
+    date: "07/2026",
+    description: "Understanding the Model Context Protocol (MCP), building custom servers to connect LLMs to local files and databases.",
+    skills: ["Model Context Protocol (MCP)", "API Design", "Node.js"],
+    image: "/certificate_placeholder.png"
   },
-    {
-    name: " Introduction to subagents",
+  {
+    name: "Introduction to subagents",
     issuer: "Anthropic",
     category: "Anthropic",
     courseUrl: "https://anthropic.skilljar.com/claude-platform-101",
     verifyUrl: "https://verify.skilljar.com/c/q63uwiviih22",
+    date: "07/2026",
+    description: "Architecting multi-agent systems where primary agents delegate tasks to child subagents for advanced multi-step workflows.",
+    skills: ["Multi-Agent Systems", "Subagents", "Task Delegation"],
+    image: "/certificate_placeholder.png"
   },
-    {
+  {
     name: "Model Context Protocol: Advanced Topics",
     issuer: "Anthropic",
     category: "Anthropic",
     courseUrl: "https://anthropic.skilljar.com/claude-platform-101",
     verifyUrl: "https://verify.skilljar.com/c/y9bkrcgn4quf",
+    date: "07/2026",
+    description: "Advanced MCP server construction, secure client-server transport protocols, tool declarations, and dynamic resource mapping.",
+    skills: ["MCP", "Server Security", "Advanced APIs"],
+    image: "/certificate_placeholder.png"
   },
-      {
+  {
     name: "Introduction to agent skills",
     issuer: "Anthropic",
     category: "Anthropic",
     courseUrl: "https://anthropic.skilljar.com/claude-platform-101",
     verifyUrl: "https://verify.skilljar.com/c/3i9ffyndhpkh",
+    date: "07/2026",
+    description: "Designing reusable toolsets and skill packages that AI agents can dynamically call during code execution.",
+    skills: ["Agent Skills", "Tool Use", "Function Calling"],
+    image: "/certificate_placeholder.png"
   },
-  
-  
-    {
+  {
     name: "Advanced JavaScript 2: Async JS, APIs, Operators, Objects",
     issuer: "Scrimba",
     category: "JavaScript",
     courseUrl: "",
     verifyUrl: "https://www.coursera.org/account/accomplishments/records/BSBJ7QWD3TD5",
+    date: "06/2026",
+    description: "Deep dive into async control flow, Promises, async/await, REST API integration, destructuring, and ES6+ operators.",
+    skills: ["Asynchronous JS", "REST APIs", "Modern JS Operators"],
+    image: "/certificate_placeholder.png"
   },
 ];
 

@@ -29,8 +29,8 @@ export default function Projects() {
         </h2>
       </div>
 
-      {/* Featured Projects Grid - Limited to 4 */}
-      <div className="grid gap-md md:grid-cols-2 mb-xl reveal-on-scroll">
+      {/* Featured Projects Vertical Stack */}
+      <div className="flex flex-col gap-6 mb-xl reveal-on-scroll">
         {displayedProjects.map((p, i) => (
           <motion.div
             key={p.title}
@@ -38,43 +38,63 @@ export default function Projects() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-60px" }}
             transition={{ duration: 0.45, delay: i * 0.06 }}
-            className="group bg-surface-container-lowest rounded-2xl overflow-hidden border border-outline-variant/30 hover:shadow-2xl transition-all reveal-on-scroll cursor-pointer"
+            className="group bg-surface-container-lowest rounded-2xl p-6 md:p-8 border border-outline-variant/30 hover:shadow-[0_0_30px_rgba(53,37,205,0.08)] hover:border-primary/40 hover:-translate-y-0.5 transition-all cursor-pointer relative"
             style={{ transitionDelay: `${i * 100}ms` }}
             onClick={() => setSelectedProject(p)}
           >
-            <div className="aspect-video overflow-hidden bg-surface-container">
-              <div className="w-full h-full bg-gradient-to-br from-primary/20 to-tertiary/20 flex items-center justify-center transition-transform duration-500 group-hover:scale-110">
-                <span className="material-symbols-outlined text-primary text-6xl opacity-20">
-                  {p.status === "live" ? "check_circle" : "archive"}
-                </span>
-              </div>
-            </div>
-            <div className="p-lg">
-              <div className="flex justify-between items-start mb-sm">
-                <h3 className="font-headline-md text-headline-md text-on-surface group-hover:text-primary transition-colors">{p.title}</h3>
-                <span
-                  className={`text-xs font-label-sm border rounded-full px-3 py-1 uppercase tracking-wider ${statusStyle[p.status]}`}
-                >
-                  {p.status}
-                </span>
-              </div>
-              <p className="text-on-surface-variant mb-md text-body-md line-clamp-2">{p.description}</p>
-              <div className="flex flex-wrap gap-xs mb-md">
-                {p.stack.slice(0, 3).map((tech) => (
-                  <span
-                    key={tech}
-                    className="text-xs font-label-sm bg-surface-container px-2 py-1 rounded text-on-surface"
-                  >
-                    {tech}
+            <div className="flex flex-col justify-between h-full">
+              <div>
+                {/* Featured Badge */}
+                <div className="flex items-center gap-2 mb-3">
+                  <span className="w-2 h-2 rounded-full bg-primary shrink-0 animate-pulse" />
+                  <span className="text-xs font-bold tracking-widest text-primary uppercase">
+                    Featured
                   </span>
-                ))}
-                {p.stack.length > 3 && (
-                  <span className="text-xs font-label-sm text-on-surface-variant">+{p.stack.length - 3} more</span>
+                </div>
+
+                {/* Header row with Title & Status */}
+                <div className="flex justify-between items-start gap-4 mb-4">
+                  <h3 className="font-headline-md text-2xl md:text-3xl text-on-surface group-hover:text-primary transition-colors leading-tight">
+                    {p.title}
+                  </h3>
+                  <span
+                    className={`text-xs font-label-sm border rounded-full px-3 py-1 uppercase tracking-wider shrink-0 ${statusStyle[p.status]}`}
+                  >
+                    {p.status}
+                  </span>
+                </div>
+
+                {/* Description */}
+                <p className="text-on-surface-variant mb-4 text-body-md leading-relaxed">
+                  {p.description}
+                </p>
+
+                {/* Summary / Tagline Arrow */}
+                {p.summary && (
+                  <p className="text-primary font-medium mb-6 text-body-md flex items-start gap-2">
+                    <span className="shrink-0 font-bold select-none">→</span>
+                    <span>{p.summary}</span>
+                  </p>
                 )}
               </div>
-              <div className="flex items-center gap-xs text-primary font-label-md group-hover:gap-sm transition-all">
-                View Details
-                <span className="material-symbols-outlined text-sm">arrow_forward</span>
+
+              {/* Bottom Row: Tech Stack Tags & View details button */}
+              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mt-2">
+                <div className="flex flex-wrap gap-2">
+                  {p.stack.map((tech) => (
+                    <span
+                      key={tech}
+                      className="text-xs font-label-sm bg-surface-container/60 border border-outline-variant/20 px-3 py-1.5 rounded-full text-on-surface-variant font-medium hover:bg-surface-container transition-colors"
+                    >
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+
+                <div className="flex items-center gap-xs text-primary font-label-md shrink-0 group-hover:gap-sm transition-all self-end sm:self-auto">
+                  View Details
+                  <span className="material-symbols-outlined text-sm">arrow_forward</span>
+                </div>
               </div>
             </div>
           </motion.div>
