@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { projects, type Status, type Project } from "../data/portfolio";
+import { projects, type Status } from "../data/portfolio";
+import type { Project } from "../data/portfolio";
 import ProjectModal from "./ProjectModal";
 
 const statusStyle: Record<Status, string> = {

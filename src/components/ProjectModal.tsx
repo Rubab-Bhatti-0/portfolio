@@ -1,5 +1,5 @@
 import { motion, AnimatePresence } from "framer-motion";
-import { Project } from "../data/portfolio";
+import type { Project } from "../data/portfolio";
 import StatusDot from "./StatusDot";
 
 interface ProjectModalProps {
