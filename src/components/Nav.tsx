@@ -83,17 +83,17 @@ export default function Nav() {
       }`}
     >
       <div className="flex items-center justify-between w-full max-w-container-max mx-auto px-gutter md:px-xl h-20">
-        <div className="flex justify-start">
+        <div className="flex-1 flex justify-start">
           <Link
             to="/"
-            className="font-display-lg text-display-lg-mobile md:text-display-lg tracking-tight text-on-surface font-bold shrink-0"
+            className="font-display-lg text-xl md:text-2xl tracking-tight text-on-surface font-bold shrink-0"
           >
             Rubab Bashir
           </Link>
         </div>
 
         {/* Desktop Navigation Links - Middle */}
-        <div className="hidden md:flex items-center justify-center gap-lg">
+        <div className="hidden md:flex flex-1 items-center justify-center gap-md lg:gap-lg">
           {links.map((link) => (
             <Link
               key={link.href}
@@ -111,7 +111,7 @@ export default function Nav() {
         </div>
 
         {/* Desktop Controls - Right */}
-        <div className="hidden md:flex items-center justify-end gap-md">
+        <div className="hidden md:flex flex-1 items-center justify-end gap-md">
           {/* Theme Toggle */}
           <button
             onClick={() => setIsDarkMode(!isDarkMode)}
