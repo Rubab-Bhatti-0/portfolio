@@ -92,7 +92,7 @@ export const certifications: Certification[] = [
     date: "06/2026",
     description: "Explores foundational concepts of AI, applications, machine learning, deep learning, neural networks, and ethical considerations.",
     skills: ["Artificial Intelligence", "Machine Learning", "AI Ethics"],
-    image: "/certificate_placeholder.png"
+    image: "/intrAI.png"
   },
   {
     name: "Advanced JavaScript 1: Objects, Loops, Hoisting",
@@ -103,7 +103,7 @@ export const certifications: Certification[] = [
     date: "05/2026",
     description: "Deep dive into JS core concepts, execution contexts, scope chains, hoisting, closures, objects, prototypes, and loops.",
     skills: ["JavaScript", "ES6+", "Programming Fundamentals"],
-    image: "/certificate_placeholder.png"
+    image: "/ajs1.png"
   },
   {
     name: "React Basics",
@@ -114,7 +114,7 @@ export const certifications: Certification[] = [
     date: "04/2026",
     description: "React fundamentals: components, props, state, event handling, hooks, list rendering, and routing for modern web apps.",
     skills: ["React.js", "Frontend Development", "Component Architecture"],
-    image: "/certificate_placeholder.png"
+    image: "/ReactBasic.png"
   },
   {
     name: "Claude Code in Action",
@@ -136,7 +136,7 @@ export const certifications: Certification[] = [
     date: "07/2026",
     description: "Foundational concepts of Large Language Models, prompt engineering techniques, and utilizing Claude for workflows.",
     skills: ["Generative AI", "Large Language Models", "Prompt Engineering"],
-    image: "/certificate_placeholder.png"
+    image: "/AIFluency.png"
   },
   {
     name: "Building with the Claude API",
@@ -158,7 +158,7 @@ export const certifications: Certification[] = [
     date: "07/2026",
     description: "Introduction to Claude Code capabilities, command-line syntax, system tools, and agentic workspace navigation.",
     skills: ["Claude Code", "Software Engineering", "Agentic Systems"],
-    image: "/certificate_placeholder.png"
+    image: "/claudeCode101.png"
   },
   {
     name: "Claude Platform 101",
@@ -169,7 +169,7 @@ export const certifications: Certification[] = [
     date: "07/2026",
     description: "Overview of Anthropic Console, API key management, Model Playground, and system instructions optimization.",
     skills: ["Anthropic Console", "API Keys", "System Prompts"],
-    image: "/certificate_placeholder.png"
+    image: "/ClaudePlatform.png"
   },
   {
     name: "Claude in Amazon Bedrock",
@@ -180,19 +180,9 @@ export const certifications: Certification[] = [
     date: "07/2026",
     description: "Deploying and scaling Claude models via Amazon Bedrock, configuring IAM permissions, and optimizing request latency.",
     skills: ["Amazon Bedrock", "AWS", "Cloud Deployment"],
-    image: "/certificate_placeholder.png"
+    image: "/claudeAmazon.png"
   },
-  {
-    name: "Claude Platform 101 (Duplicate)",
-    issuer: "Anthropic",
-    category: "Anthropic",
-    courseUrl: "https://anthropic.skilljar.com/claude-platform-101",
-    verifyUrl: "",
-    date: "07/2026",
-    description: "Additional platform workflows, dashboard tracking, and usage analytics settings inside the developer console.",
-    skills: ["Anthropic Console", "Developer Tools"],
-    image: "/certificate_placeholder.png"
-  },
+
   {
     name: "Claude with Google Cloud's Vertex AI",
     issuer: "Anthropic",
@@ -213,7 +203,7 @@ export const certifications: Certification[] = [
     date: "07/2026",
     description: "Understanding the Model Context Protocol (MCP), building custom servers to connect LLMs to local files and databases.",
     skills: ["Model Context Protocol (MCP)", "API Design", "Node.js"],
-    image: "/certificate_placeholder.png"
+    image: "/MCP.png"
   },
   {
     name: "Introduction to subagents",
@@ -224,7 +214,7 @@ export const certifications: Certification[] = [
     date: "07/2026",
     description: "Architecting multi-agent systems where primary agents delegate tasks to child subagents for advanced multi-step workflows.",
     skills: ["Multi-Agent Systems", "Subagents", "Task Delegation"],
-    image: "/certificate_placeholder.png"
+    image: "/IntroSubAgents.png"
   },
   {
     name: "Model Context Protocol: Advanced Topics",
@@ -235,7 +225,7 @@ export const certifications: Certification[] = [
     date: "07/2026",
     description: "Advanced MCP server construction, secure client-server transport protocols, tool declarations, and dynamic resource mapping.",
     skills: ["MCP", "Server Security", "Advanced APIs"],
-    image: "/certificate_placeholder.png"
+    image: "/AdvanceMCP.png"
   },
   {
     name: "Introduction to agent skills",
@@ -246,7 +236,7 @@ export const certifications: Certification[] = [
     date: "07/2026",
     description: "Designing reusable toolsets and skill packages that AI agents can dynamically call during code execution.",
     skills: ["Agent Skills", "Tool Use", "Function Calling"],
-    image: "/certificate_placeholder.png"
+    image: "/IntroAgentSkill.png"
   },
   {
     name: "Advanced JavaScript 2: Async JS, APIs, Operators, Objects",
@@ -257,7 +247,7 @@ export const certifications: Certification[] = [
     date: "06/2026",
     description: "Deep dive into async control flow, Promises, async/await, REST API integration, destructuring, and ES6+ operators.",
     skills: ["Asynchronous JS", "REST APIs", "Modern JS Operators"],
-    image: "/certificate_placeholder.png"
+    image: "/ajs2.png"
   },
     {
     name: "Supervised Machine Learning: Regression and Classification ",
@@ -271,7 +261,7 @@ export const certifications: Certification[] = [
     "Linear & Logistic Regression",
     "Classification Algorithms",
     "Model Evaluation & Regularization"],
-    image: "/certificate_placeholder.png"
+    image: "/ML01.png"
   },
 
 ];
