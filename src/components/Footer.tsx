@@ -49,7 +49,7 @@ export default function Footer() {
           ))}
         </div> */}
                 {/* Desktop Navigation Links - Middle */}
-        <div className="hidden md:flex flex-1 items-center justify-center gap-md lg:gap-lg">
+        <div className="flex gap-lg">
           {links.map((link) => (
             <Link
               key={link.href}
