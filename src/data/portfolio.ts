@@ -105,6 +105,17 @@ export const certifications: Certification[] = [
     skills: ["JavaScript", "ES6+", "Programming Fundamentals"],
     image: "/ajs1.png"
   },
+    {
+    name: "Advanced JavaScript 3: Objects, Collections, Functions",
+    issuer: "Scrimba / Coursera",
+    category: "JavaScript",
+    courseUrl: "https://www.coursera.org/learn/advanced-javascript-1-objects-loops-hoisting",
+    verifyUrl: "https://www.coursera.org/account/accomplishments/records/TV983UZ578U3",
+    date: "07/2026",
+    description: "Deep dive into JS core concepts, execution contexts, scope chains, hoisting, closures, objects, prototypes, and loops.",
+    skills: ["JavaScript", "ES6+", "Programming Fundamentals","Data Structures","Object Oriented Design","Object Oriented Programming (OOP)"],
+    image: "/js04.png"
+  },
   {
     name: "React Basics",
     issuer: "Meta",
