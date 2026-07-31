@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import { profile } from "../data/portfolio";
+import { motion, AnimatePresence } from "framer-motion";
+
 
 const links = [
   { href: "about", label: "About" },
@@ -174,41 +176,51 @@ export default function Nav() {
       </div>
 
       {/* Mobile Navigation */}
-      {mobileMenuOpen && (
-        <div className="md:hidden absolute top-20 left-0 w-full bg-surface border-b border-outline-variant p-gutter flex flex-col gap-sm">
-          {links.map((link) => (
-            <Link
-              key={link.href}
-              to={`/#${link.href}`}
-              className="text-on-surface-variant hover:text-primary transition-colors"
-              onClick={(e) => {
-                setMobileMenuOpen(false);
-                handleLinkClick(e, link.href);
-              }}
-            >
-              {link.label}
-            </Link>
-          ))}
-          <div className="border-t border-outline-variant/30 pt-sm mt-sm">
-            <a
-              href={profile.links.github}
-              target="_blank"
-              rel="noreferrer"
-              className="block text-on-surface-variant hover:text-primary transition-colors mb-sm"
-            >
-              GitHub
-            </a>
-            <a
-              href={profile.links.linkedin}
-              target="_blank"
-              rel="noreferrer"
-              className="block text-on-surface-variant hover:text-primary transition-colors"
-            >
-              LinkedIn
-            </a>
-          </div>
-        </div>
-      )}
+      <AnimatePresence>
+        {mobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.3, ease: "easeInOut" }}
+            className="md:hidden absolute top-20 left-0 w-full bg-surface/95 backdrop-blur-md border-b border-outline-variant/30 p-gutter flex flex-col gap-sm overflow-hidden z-50 shadow-lg"
+          >
+            {links.map((link) => (
+              <Link
+                key={link.href}
+                to={`/#${link.href}`}
+                className="text-on-surface-variant hover:text-primary transition-colors font-body-md py-xs border-b border-outline-variant/10 last:border-0"
+                onClick={(e) => {
+                  setMobileMenuOpen(false);
+                  handleLinkClick(e, link.href);
+                }}
+              >
+                {link.label}
+              </Link>
+            ))}
+            <div className="border-t border-outline-variant/30 pt-sm mt-sm flex flex-col gap-sm">
+              <a
+                href={profile.links.github}
+                target="_blank"
+                rel="noreferrer"
+                className="flex items-center gap-xs text-on-surface-variant hover:text-primary transition-colors"
+              >
+                <span className="material-symbols-outlined text-md">code</span>
+                GitHub
+              </a>
+              <a
+                href={profile.links.linkedin}
+                target="_blank"
+                rel="noreferrer"
+                className="flex items-center gap-xs text-on-surface-variant hover:text-primary transition-colors"
+              >
+                <span className="material-symbols-outlined text-md">link</span>
+                LinkedIn
+              </a>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </nav>
   );
 }

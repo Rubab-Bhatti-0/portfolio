@@ -13,11 +13,20 @@ import AllProjects from "./components/AllProjects";
 
 import { useEffect } from "react";
 
-function ScrollToTop() {
-  const { pathname } = useLocation();
+function ScrollToHashAndTop() {
+  const { pathname, hash } = useLocation();
   useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [pathname]);
+    if (hash) {
+      const element = document.getElementById(hash.substring(1));
+      if (element) {
+        setTimeout(() => {
+          element.scrollIntoView({ behavior: "smooth" });
+        }, 100);
+      }
+    } else {
+      window.scrollTo(0, 0);
+    }
+  }, [pathname, hash]);
   return null;
 }
 
@@ -44,7 +53,7 @@ function HomePage() {
 export default function App() {
   return (
     <Router>
-      <ScrollToTop />
+      <ScrollToHashAndTop />
       <div className="min-h-screen bg-background">
         <Nav />
         <main>

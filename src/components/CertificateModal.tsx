@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import type { Certification } from "../data/portfolio";
 
@@ -8,6 +9,14 @@ interface CertificateModalProps {
 }
 
 export default function CertificateModal({ certification, isOpen, onClose }: CertificateModalProps) {
+  const [imageLoading, setImageLoading] = useState(true);
+
+  useEffect(() => {
+    if (isOpen) {
+      setImageLoading(true);
+    }
+  }, [certification, isOpen]);
+
   if (!certification) return null;
 
   return (
@@ -56,14 +65,20 @@ export default function CertificateModal({ certification, isOpen, onClose }: Cer
                   {certification.name}
                 </h2>
 
-                {/* Certificate Image Frame */}
+                 {/* Certificate Image Frame */}
                 <div className="border border-outline-variant/30 rounded-2xl overflow-hidden bg-surface-container-low mb-6 shadow-sm aspect-[4/3] max-w-2xl mx-auto flex items-center justify-center relative group">
+                  {imageLoading && (
+                    <div className="absolute inset-0 bg-surface-container-low flex items-center justify-center">
+                      <div className="w-10 h-10 border-4 border-primary/20 border-t-primary rounded-full animate-spin" />
+                    </div>
+                  )}
                   <img
                     src={certification.image || "/certificate_placeholder.png"}
                     alt={`${certification.name} Certificate`}
-                    className="w-full h-full object-contain"
+                    className={`w-full h-full object-contain transition-opacity duration-300 ${imageLoading ? "opacity-0" : "opacity-100"}`}
+                    onLoad={() => setImageLoading(false)}
                     onError={(e) => {
-                      // Fallback to placeholder if the image fails to load
+                      setImageLoading(false);
                       e.currentTarget.src = "/certificate_placeholder.png";
                     }}
                   />

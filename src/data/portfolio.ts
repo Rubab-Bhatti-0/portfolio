@@ -323,6 +323,26 @@ export const projects: Project[] = [
     summary: "A robust multi-vendor ecosystem bridging local service providers with community needs."
   },
   {
+    title: "Developer Portfolio Website",
+    period: "07/2026",
+    description:
+      "A premium, highly interactive, and fully responsive developer portfolio website designed to showcase projects, experience, and professional certifications with micro-animations.",
+    stack: ["React", "TypeScript", "Vite", "Tailwind CSS", "Framer Motion", "React Router"],
+    featured: true,
+    status: "live",
+    github: "https://github.com/Rubab-Bhatti-0/portfolio",
+    live: "https://rubab-bhatti-portfolio.vercel.app",
+    category: "WEB DEVELOPMENT",
+    bullets: [
+      "Designed a modern dark/light system using custom Tailwind configurations and CSS variables.",
+      "Implemented a high-performance WebGL fragment shader background for the Hero section, fully managed by React hooks to avoid memory leaks.",
+      "Built custom scroll handling to support seamless hash routing and smooth scrolling across sub-pages.",
+      "Developed fully responsive modal systems for detailed project inspection and animated credential overlays.",
+      "Engineered a custom toast notification alert system and interactive copy-to-clipboard actions."
+    ],
+    summary: "A premium showcase of engineering capability and interactive user experience.",
+  },
+  {
     title: "FlexiBerry",
     period: "02/2026 — 04/2026",
     description:
