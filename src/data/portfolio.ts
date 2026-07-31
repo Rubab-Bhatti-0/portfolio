@@ -298,6 +298,31 @@ export const certifications: Certification[] = [
     "Model Evaluation & Regularization"],
     image: "/ML01.png"
   },
+      {
+    name: "Advanced Learning Algorithms ",
+    issuer: "DeepLearning.AI, Stanford University",
+    category: "Machine Learning",
+    courseUrl: "",
+    verifyUrl: "https://www.coursera.org/account/accomplishments/records/64HWED203YNB",
+    date: "07/2026",
+    description: "Build and train neural networks with TensorFlow, implement decision trees and ensemble methods, and apply machine learning best practices to develop robust, real-world predictive models.",
+
+skills: [
+  "TensorFlow",
+  "Neural Networks",
+  "Decision Trees",
+  "Random Forest",
+  "Ensemble Learning",
+  "Deep Learning",
+  "Model Evaluation",
+  "Model Training",
+  "Classification Algorithms",
+  "Applied Machine Learning",
+  "Transfer Learning",
+  "Responsible AI"
+],
+    image: "/ml02.png"
+  },
 
 ];
 
@@ -331,7 +356,7 @@ export const projects: Project[] = [
     featured: true,
     status: "live",
     github: "https://github.com/Rubab-Bhatti-0/portfolio",
-    live: "https://rubab-bhatti-portfolio.vercel.app",
+    live: "https://rubab-s-portfolio.vercel.app/",
     category: "WEB DEVELOPMENT",
     bullets: [
       "Designed a modern dark/light system using custom Tailwind configurations and CSS variables.",
