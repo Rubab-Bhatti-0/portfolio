@@ -112,7 +112,7 @@ export const certifications: Certification[] = [
     courseUrl: "https://www.coursera.org/learn/advanced-javascript-1-objects-loops-hoisting",
     verifyUrl: "https://www.coursera.org/account/accomplishments/records/TV983UZ578U3",
     date: "07/2026",
-    description: "Deep dive into JS core concepts, execution contexts, scope chains, hoisting, closures, objects, prototypes, and loops.",
+    description: "Master advanced JavaScript concepts including objects, collections, functions, prototypes, object-oriented programming, and modern ES6+ features for writing efficient and maintainable applications.",
     skills: ["JavaScript", "ES6+", "Programming Fundamentals","Data Structures","Object Oriented Design","Object Oriented Programming (OOP)"],
     image: "/js04.png"
   },
@@ -122,10 +122,34 @@ export const certifications: Certification[] = [
     category: "Web Development",
     courseUrl: "https://www.coursera.org/learn/react-basics",
     verifyUrl: "https://www.coursera.org/account/accomplishments/records/G24NB0IVMINM",
-    date: "04/2026",
+    date: "06/2026",
     description: "React fundamentals: components, props, state, event handling, hooks, list rendering, and routing for modern web apps.",
     skills: ["React.js", "Frontend Development", "Component Architecture"],
     image: "/ReactBasic.png"
+  },
+    {
+    name: "Advanced React",
+    issuer: "Meta",
+    category: "Web Development",
+    courseUrl: "https://www.coursera.org/learn/advanced-react",
+    verifyUrl: "https://www.coursera.org/account/accomplishments/records/34VV48B6ERAV",
+    date: "07/2026",
+    description: "Advanced React development with reusable components, API integration, React Testing Library, and popular React libraries for building scalable and maintainable web applications.",
+    skills: [
+    "React.js",
+    "Front-End Web Development",
+    "Code Reusability",
+    "JavaScript Frameworks",
+    "Unit Testing",
+    "Web Development Tools",
+    "Context Management",
+    "Jest (JavaScript Testing Framework)",
+    "Software Design Patterns",
+    "JavaScript",
+    "UI Components",
+    "Application Programming Interface (API)"
+],
+    image: "/react2.png"
   },
   {
     name: "Claude Code in Action",
