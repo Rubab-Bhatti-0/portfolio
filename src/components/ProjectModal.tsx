@@ -1,6 +1,8 @@
+import { useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import type { Project } from "../data/portfolio";
 import StatusDot from "./StatusDot";
+import { isValidHttpUrl } from "../lib/validation";
 
 interface ProjectModalProps {
   project: Project | null;
@@ -9,6 +11,22 @@ interface ProjectModalProps {
 }
 
 export default function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
+  useEffect(() => {
+    if (!isOpen) return;
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") onClose();
+    };
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [isOpen, onClose]);
+
   if (!project) return null;
 
   return (
@@ -21,6 +39,7 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={onClose}
+            aria-hidden="true"
             className="fixed inset-0 bg-black/40 backdrop-blur-sm z-[60]"
           />
 
@@ -30,11 +49,15 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
               initial={{ opacity: 0, scale: 0.9, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.9, y: 20 }}
+              role="dialog"
+              aria-modal="true"
+              aria-labelledby="project-modal-title"
               className="w-full max-w-2xl bg-surface-container-lowest border border-outline-variant/30 rounded-3xl overflow-hidden shadow-2xl pointer-events-auto relative max-h-[90vh] flex flex-col lightning-glow"
             >
               {/* Close Button */}
               <button
                 onClick={onClose}
+                aria-label="Close project details"
                 className="absolute top-6 right-6 text-on-surface-variant hover:text-on-surface transition-colors z-10 bg-surface-container-low/80 backdrop-blur-sm p-1.5 rounded-full"
               >
                 <span className="material-symbols-outlined text-xl">close</span>
@@ -50,7 +73,7 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
                 </div>
 
                 {/* Title */}
-                <h2 className="text-4xl md:text-5xl font-bold text-on-surface mb-6 leading-tight pr-8">
+                <h2 id="project-modal-title" className="text-4xl md:text-5xl font-bold text-on-surface mb-6 leading-tight pr-8">
                   {project.title}
                 </h2>
 
@@ -60,8 +83,8 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
                 </p>
 
                 {/* Action Button */}
-                <div className="flex gap-4 mb-10">
-                  {project.live ? (
+                <div className="flex flex-wrap gap-4 mb-10">
+                  {isValidHttpUrl(project.live) && (
                     <a
                       href={project.live}
                       target="_blank"
@@ -71,7 +94,8 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
                       View Live
                       <span className="material-symbols-outlined text-sm">north_east</span>
                     </a>
-                  ) : (
+                  )}
+                  {isValidHttpUrl(project.github) && (
                     <a
                       href={project.github}
                       target="_blank"

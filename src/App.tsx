@@ -16,16 +16,22 @@ import { useEffect } from "react";
 function ScrollToHashAndTop() {
   const { pathname, hash } = useLocation();
   useEffect(() => {
+    let timeoutId: number | undefined;
+
     if (hash) {
       const element = document.getElementById(hash.substring(1));
       if (element) {
-        setTimeout(() => {
-          element.scrollIntoView({ behavior: "smooth" });
+        timeoutId = window.setTimeout(() => {
+          element.scrollIntoView({ behavior: "smooth", block: "start" });
         }, 100);
       }
     } else {
-      window.scrollTo(0, 0);
+      window.scrollTo({ top: 0, left: 0, behavior: "auto" });
     }
+
+    return () => {
+      if (timeoutId !== undefined) window.clearTimeout(timeoutId);
+    };
   }, [pathname, hash]);
   return null;
 }

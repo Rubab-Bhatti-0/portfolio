@@ -3,14 +3,18 @@ import { motion } from "framer-motion";
 import { useState } from "react";
 import { certifications, type Certification } from "../data/portfolio";
 import CertificateModal from "./CertificateModal";
+import { slugify } from "../lib/validation";
 
 export default function CertificationDetail() {
-  const { category } = useParams<{ category: string }>();
+  const { category: categoryParam } = useParams<{ category: string }>();
   const [selectedCert, setSelectedCert] = useState<Certification | null>(null);
-  
-  const filteredCerts = certifications.filter(
-    (cert) => cert.category.toLowerCase() === category?.toLowerCase()
+  const categorySlug = (categoryParam ?? "").trim().toLowerCase();
+  const matchedCategory = Array.from(new Set(certifications.map((cert) => cert.category))).find(
+    (categoryName) => slugify(categoryName) === categorySlug,
   );
+  const filteredCerts = matchedCategory
+    ? certifications.filter((cert) => cert.category === matchedCategory)
+    : [];
 
   const getIcon = (issuer: string) => {
     if (issuer.includes("IBM")) return "workspace_premium";
@@ -38,17 +42,30 @@ export default function CertificationDetail() {
         </Link>
         
         <h1 className="font-display-lg text-display-lg-mobile md:text-display-lg mb-xl text-on-surface">
-          {category} <span className="text-primary">Certifications</span>
+          {matchedCategory ? (
+            <>{matchedCategory} <span className="text-primary">Certifications</span></>
+          ) : (
+            <span className="text-primary">Certification category</span>
+          )}
         </h1>
 
+        {!matchedCategory ? (
+          <div className="glass-card rounded-2xl p-8 text-center border border-outline-variant/30">
+            <span className="material-symbols-outlined text-4xl text-primary mb-3">search_off</span>
+            <h2 className="font-headline-md text-xl font-bold text-on-surface mb-2">Certification category not found</h2>
+            <p className="text-on-surface-variant mb-5">The requested certification category does not exist.</p>
+            <Link to="/#certifications" className="text-primary font-semibold hover:underline">Return to certifications</Link>
+          </div>
+        ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-md">
           {filteredCerts.map((cert, i) => (
-            <motion.div
+            <motion.button
               key={cert.name}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4, delay: i * 0.08 }}
-              className="glass-card p-6 rounded-2xl flex flex-col justify-between border border-outline-variant/30 hover:shadow-lg hover:border-primary/50 transition-all group cursor-pointer h-full"
+              type="button"
+              className="glass-card p-6 rounded-2xl flex flex-col justify-between border border-outline-variant/30 hover:shadow-lg hover:border-primary/50 transition-all group cursor-pointer h-full w-full text-left"
               onClick={() => setSelectedCert(cert)}
             >
               <div>
@@ -105,9 +122,10 @@ export default function CertificationDetail() {
                   View Certificate <span className="material-symbols-outlined text-sm">arrow_forward</span>
                 </div>
               </div>
-            </motion.div>
+            </motion.button>
           ))}
         </div>
+        )}
       </div>
     </div>
   );

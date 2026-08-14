@@ -222,7 +222,7 @@ export const certifications: Certification[] = [
     name: "Claude with Google Cloud's Vertex AI",
     issuer: "Anthropic",
     category: "Anthropic",
-    courseUrl: "https://anthropic.skilljar.com/Claude with Google Cloud's Vertex AI",
+    courseUrl: "https://anthropic.skilljar.com/claude-with-google-vertex",
     verifyUrl: "https://verify.skilljar.com/c/kedynzin6qiq",
     date: "07/2026",
     description: "Hosting and evaluating Claude models inside GCP Vertex AI, managing service accounts, and enterprise AI safety.",

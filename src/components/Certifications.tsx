@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { certifications } from "../data/portfolio";
+import { slugify } from "../lib/validation";
 
 export default function Certifications() {
   // Group certifications by category
@@ -36,7 +37,7 @@ export default function Certifications() {
               transition={{ duration: 0.4, delay: i * 0.1 }}
             >
               <Link
-                to={`/certifications/${category}`}
+                to={`/certifications/${slugify(category)}`}
                 className="glass-card p-lg rounded-2xl flex flex-col items-center text-center gap-md border border-outline-variant/30 hover:shadow-lg hover:border-primary/50 transition-all group h-full"
               >
                 <div className="w-16 h-16 rounded-full bg-primary/10 text-primary flex items-center justify-center shrink-0 group-hover:bg-primary/20 transition-colors mb-2">

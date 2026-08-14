@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import type { Certification } from "../data/portfolio";
+import { isValidHttpUrl } from "../lib/validation";
 
 interface CertificateModalProps {
   certification: Certification | null;
@@ -10,6 +11,22 @@ interface CertificateModalProps {
 
 export default function CertificateModal({ certification, isOpen, onClose }: CertificateModalProps) {
   const [imageLoading, setImageLoading] = useState(true);
+
+  useEffect(() => {
+    if (!isOpen) return;
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") onClose();
+    };
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [isOpen, onClose]);
 
   useEffect(() => {
     if (isOpen) {
@@ -29,6 +46,7 @@ export default function CertificateModal({ certification, isOpen, onClose }: Cer
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={onClose}
+            aria-hidden="true"
             className="fixed inset-0 bg-black/40 backdrop-blur-sm z-[60]"
           />
 
@@ -38,11 +56,15 @@ export default function CertificateModal({ certification, isOpen, onClose }: Cer
               initial={{ opacity: 0, scale: 0.9, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.9, y: 20 }}
+              role="dialog"
+              aria-modal="true"
+              aria-labelledby="certificate-modal-title"
               className="w-full max-w-3xl bg-surface-container-lowest border border-outline-variant/30 rounded-3xl overflow-hidden shadow-2xl pointer-events-auto relative max-h-[90vh] flex flex-col lightning-glow"
             >
               {/* Close Button */}
               <button
                 onClick={onClose}
+                aria-label="Close certificate details"
                 className="absolute top-6 right-6 text-on-surface-variant hover:text-on-surface transition-colors z-10 bg-surface-container-low/80 backdrop-blur-sm p-1.5 rounded-full"
               >
                 <span className="material-symbols-outlined text-xl">close</span>
@@ -61,7 +83,7 @@ export default function CertificateModal({ certification, isOpen, onClose }: Cer
                 </div>
 
                 {/* Title */}
-                <h2 className="text-3xl md:text-4xl font-bold text-on-surface mb-6 leading-tight pr-8">
+                <h2 id="certificate-modal-title" className="text-3xl md:text-4xl font-bold text-on-surface mb-6 leading-tight pr-8">
                   {certification.name}
                 </h2>
 
@@ -117,7 +139,7 @@ export default function CertificateModal({ certification, isOpen, onClose }: Cer
 
                 {/* Action Buttons */}
                 <div className="flex flex-wrap gap-4 pt-4 border-t border-outline-variant/20">
-                  {certification.verifyUrl && (
+                  {isValidHttpUrl(certification.verifyUrl) && (
                     <a
                       href={certification.verifyUrl}
                       target="_blank"
@@ -129,7 +151,7 @@ export default function CertificateModal({ certification, isOpen, onClose }: Cer
                     </a>
                   )}
                   
-                  {certification.courseUrl && (
+                  {isValidHttpUrl(certification.courseUrl) && (
                     <a
                       href={certification.courseUrl}
                       target="_blank"

@@ -1,11 +1,21 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { profile } from "../data/portfolio";
+import {
+  copyTextFallback,
+  hasValidationErrors,
+  MAX_EMAIL_LENGTH,
+  MAX_MESSAGE_LENGTH,
+  MAX_NAME_LENGTH,
+  validateContactForm,
+  type ContactFormErrors,
+} from "../lib/validation";
 import Toast from "./Toast";
 
 export default function Contact() {
   const [form, setForm] = useState({ name: "", email: "", message: "" });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [errors, setErrors] = useState<ContactFormErrors>({});
   const [toast, setToast] = useState<{ message: string; type: "success" | "error" | "info"; isOpen: boolean }>({
     message: "",
     type: "success",
@@ -16,46 +26,41 @@ export default function Contact() {
     setToast({ message, type, isOpen: true });
   };
 
-  const handleCopy = (text: string, label: string) => {
-    navigator.clipboard.writeText(text)
-      .then(() => {
-        showToast(`${label} copied to clipboard!`, "success");
-      })
-      .catch(() => {
-        showToast(`Failed to copy ${label.toLowerCase()}`, "error");
-      });
+  const handleCopy = async (text: string, label: string) => {
+    try {
+      if (navigator.clipboard?.writeText) {
+        await navigator.clipboard.writeText(text);
+      } else if (!copyTextFallback(text)) {
+        throw new Error("Clipboard is unavailable");
+      }
+      showToast(`${label} copied to clipboard!`, "success");
+    } catch {
+      showToast(`Failed to copy ${label.toLowerCase()}`, "error");
+    }
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (!form.name.trim()) {
-      showToast("Please enter your name.", "error");
-      return;
-    }
-    if (!form.email.trim()) {
-      showToast("Please enter your email.", "error");
-      return;
-    }
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(form.email.trim())) {
-      showToast("Please enter a valid email address.", "error");
-      return;
-    }
-    if (!form.message.trim()) {
-      showToast("Please enter your message.", "error");
+    const nextErrors = validateContactForm(form);
+    setErrors(nextErrors);
+
+    if (hasValidationErrors(nextErrors)) {
+      const firstError = Object.values(nextErrors)[0];
+      showToast(firstError ?? "Please correct the highlighted fields.", "error");
       return;
     }
 
     setIsSubmitting(true);
     showToast("Redirecting to your email client...", "success");
 
-    setTimeout(() => {
+    window.setTimeout(() => {
       const mailtoHref = `mailto:${profile.email}?subject=${encodeURIComponent(
-        `Portfolio inquiry from ${form.name}`
-      )}&body=${encodeURIComponent(`From: ${form.name} <${form.email}>\n\n${form.message}`)}`;
+        `Portfolio inquiry from ${form.name.trim()}`
+      )}&body=${encodeURIComponent(`From: ${form.name.trim()} <${form.email.trim()}>\n\n${form.message.trim()}`)}`;
       window.location.href = mailtoHref;
       setIsSubmitting(false);
       setForm({ name: "", email: "", message: "" });
+      setErrors({});
     }, 1200);
   };
 
@@ -157,47 +162,65 @@ export default function Contact() {
             className="glass-card p-lg rounded-2xl reveal-on-scroll lightning-glow"
             style={{ transitionDelay: "200ms" }}
           >
-            <form onSubmit={handleSubmit} className="space-y-md">
+            <form onSubmit={handleSubmit} noValidate className="space-y-md">
               <div className="grid md:grid-cols-2 gap-md">
                 <div>
-                  <label className="block font-label-md text-on-surface-variant mb-base">
+                  <label htmlFor="contact-name" className="block font-label-md text-on-surface-variant mb-base">
                     Name
                   </label>
                   <input
+                    id="contact-name"
                     type="text"
                     value={form.name}
                     onChange={(e) => setForm({ ...form, name: e.target.value })}
                     placeholder="John Doe"
+                    maxLength={MAX_NAME_LENGTH}
                     disabled={isSubmitting}
-                    className="w-full bg-surface border border-outline-variant rounded-lg px-4 py-3 text-on-surface placeholder-on-surface-variant/50 focus:ring-2 focus:ring-primary focus:border-primary transition-all outline-none disabled:opacity-50"
+                    aria-invalid={Boolean(errors.name)}
+                    aria-describedby={errors.name ? "contact-name-error" : undefined}
+                    className="w-full bg-surface border border-outline-variant rounded-lg px-4 py-3 text-on-surface placeholder-on-surface-variant/50 focus:ring-2 focus:ring-primary focus:border-primary transition-all outline-none disabled:opacity-50 aria-[invalid=true]:border-red-500"
                   />
+                  {errors.name && <p id="contact-name-error" className="mt-1 text-sm text-red-500">{errors.name}</p>}
                 </div>
                 <div>
-                  <label className="block font-label-md text-on-surface-variant mb-base">
+                  <label htmlFor="contact-email" className="block font-label-md text-on-surface-variant mb-base">
                     Email
                   </label>
                   <input
+                    id="contact-email"
                     type="email"
                     value={form.email}
                     onChange={(e) => setForm({ ...form, email: e.target.value })}
                     placeholder="john@example.com"
+                    maxLength={MAX_EMAIL_LENGTH}
                     disabled={isSubmitting}
-                    className="w-full bg-surface border border-outline-variant rounded-lg px-4 py-3 text-on-surface placeholder-on-surface-variant/50 focus:ring-2 focus:ring-primary focus:border-primary transition-all outline-none disabled:opacity-50"
+                    aria-invalid={Boolean(errors.email)}
+                    aria-describedby={errors.email ? "contact-email-error" : undefined}
+                    className="w-full bg-surface border border-outline-variant rounded-lg px-4 py-3 text-on-surface placeholder-on-surface-variant/50 focus:ring-2 focus:ring-primary focus:border-primary transition-all outline-none disabled:opacity-50 aria-[invalid=true]:border-red-500"
                   />
+                  {errors.email && <p id="contact-email-error" className="mt-1 text-sm text-red-500">{errors.email}</p>}
                 </div>
               </div>
               <div>
-                <label className="block font-label-md text-on-surface-variant mb-base">
+                <label htmlFor="contact-message" className="block font-label-md text-on-surface-variant mb-base">
                   Message
                 </label>
                 <textarea
+                  id="contact-message"
                   value={form.message}
                   onChange={(e) => setForm({ ...form, message: e.target.value })}
                   placeholder="Your message here..."
                   rows={5}
+                  maxLength={MAX_MESSAGE_LENGTH}
                   disabled={isSubmitting}
-                  className="w-full bg-surface border border-outline-variant rounded-lg px-4 py-3 text-on-surface placeholder-on-surface-variant/50 focus:ring-2 focus:ring-primary focus:border-primary transition-all outline-none resize-none disabled:opacity-50"
+                  aria-invalid={Boolean(errors.message)}
+                  aria-describedby={errors.message ? "contact-message-error" : undefined}
+                  className="w-full bg-surface border border-outline-variant rounded-lg px-4 py-3 text-on-surface placeholder-on-surface-variant/50 focus:ring-2 focus:ring-primary focus:border-primary transition-all outline-none resize-none disabled:opacity-50 aria-[invalid=true]:border-red-500"
                 />
+                <div className="mt-1 flex items-start justify-between gap-3">
+                  {errors.message ? <p id="contact-message-error" className="text-sm text-red-500">{errors.message}</p> : <span />}
+                  <span className="text-xs text-on-surface-variant/70">{form.message.length}/{MAX_MESSAGE_LENGTH}</span>
+                </div>
               </div>
               <button
                 type="submit"

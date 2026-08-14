@@ -167,8 +167,12 @@ export default function Nav() {
 
           {/* Mobile Menu Button */}
           <button
+            type="button"
             className="text-on-surface p-1"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            aria-label={mobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
+            aria-expanded={mobileMenuOpen}
+            aria-controls="mobile-navigation"
           >
             {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
@@ -183,6 +187,7 @@ export default function Nav() {
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.3, ease: "easeInOut" }}
+            id="mobile-navigation"
             className="md:hidden absolute top-20 left-0 w-full bg-surface/95 backdrop-blur-md border-b border-outline-variant/30 p-gutter flex flex-col gap-sm overflow-hidden z-50 shadow-lg"
           >
             {links.map((link) => (
