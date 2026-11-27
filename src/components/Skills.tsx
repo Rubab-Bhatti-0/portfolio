@@ -3,13 +3,9 @@ import { skillModules } from "../data/portfolio";
 
 export default function Skills() {
   return (
-    <section id="skills" className="mx-auto max-w-container-max px-gutter md:px-xl py-xl">
-      <div className="mb-xl">
-        <h2 className="font-display-lg text-display-lg-mobile md:text-display-lg text-on-surface mb-md reveal-on-scroll">
-          Technical <span className="text-primary">Skills</span>
-        </h2>
-      </div>
-      <div className="grid gap-md sm:grid-cols-2 lg:grid-cols-3">
+    <section id="skills" className="portfolio-container py-10 md:py-14">
+      <h2 className="portfolio-section-title mb-5">Technical skills</h2>
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {skillModules.map((mod, i) => (
           <motion.div
             key={mod.label}
@@ -17,16 +13,16 @@ export default function Skills() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-60px" }}
             transition={{ duration: 0.4, delay: i * 0.05 }}
-            className="glass-card p-lg rounded-2xl border border-outline-variant/30 hover:shadow-lg transition-all reveal-on-scroll"
+            className="glass-card rounded-2xl p-5"
           >
-            <p className="font-label-md text-primary uppercase tracking-wider mb-md">
+            <h3 className="mb-3 font-headline-md font-bold">
               {mod.label}
-            </p>
+            </h3>
             <div className="flex flex-wrap gap-xs">
               {mod.items.map((item) => (
                 <span
                   key={item}
-                  className="text-xs font-label-sm bg-surface-container px-2 py-1 rounded text-on-surface"
+                  className="portfolio-tag"
                 >
                   {item}
                 </span>

@@ -1,9 +1,10 @@
-
+import bagCheckCover from "../assets/bagcheck-campus.jpg";
 
 export const profile = {
   name: "Rubab Bashir",
-  role: "Mern Developer & ML/AI Engineer",
+  role: "Full-stack developer & ML engineer",
   location: "Lahore, Pakistan",
+  intro: "I build MERN applications and machine learning tools. I’m studying computer science at COMSATS University.",
   email: "rubabbhatti310504@gmail.com",
   phone: "0326 4534799",
   links: {
@@ -20,7 +21,7 @@ export const profile = {
   },
 };
 
-export type Status = "live" | "internal" | "archived";
+export type Status = "live" | "internal" | "archived" | "development";
 
 export interface Project {
   title: string;
@@ -32,6 +33,8 @@ export interface Project {
   github: string;
   live: string;
   category?: string;
+  subtitle?: string;
+  cover?: { src: string; alt: string; caption: string };
   bullets?: string[];
   summary?: string;
 }
@@ -442,6 +445,29 @@ export const certifications: Certification[] = [
 
 export const projects: Project[] = [
   {
+    title: "BagCheck",
+    subtitle: "Campus lost & found",
+    period: "11/2026",
+    description:
+      "Students post lost and found items. A semantic matching service suggests related reports from the same campus.",
+    stack: ["React", "Express", "MongoDB", "FastAPI", "Sentence Transformers"],
+    featured: true,
+    status: "development",
+    github: "https://github.com/Rubab-Bhatti-0/BagCheck",
+    live: "",
+    category: "Full-stack & machine learning",
+    cover: {
+      src: bagCheckCover,
+      alt: "A backpack, notebook, and keys on a bench on campus",
+      caption: "Back2U · Campus lost & found",
+    },
+    bullets: [
+      "Built university and campus filters for browsing lost and found reports, with photo uploads through Cloudinary.",
+      "Used sentence embeddings and cosine similarity in a FastAPI service to rank related lost and found reports from the same campus.",
+      "Added a relevance classifier to catch off-topic reports and a contact request workflow to help students arrange returns.",
+    ],
+  },
+  {
     title: "Underwater Image Enhancement",
     period: "11/2026",
     description:
@@ -494,7 +520,7 @@ export const projects: Project[] = [
     category: "WEB DEVELOPMENT",
     bullets: [
       "Designed a modern dark/light system using custom Tailwind configurations and CSS variables.",
-      "Implemented a high-performance WebGL fragment shader background for the Hero section, fully managed by React hooks to avoid memory leaks.",
+      "Designed a responsive homepage with a featured project showcase and an expanded project gallery.",
       "Built custom scroll handling to support seamless hash routing and smooth scrolling across sub-pages.",
       "Developed fully responsive modal systems for detailed project inspection and animated credential overlays.",
       "Engineered a custom toast notification alert system and interactive copy-to-clipboard actions."

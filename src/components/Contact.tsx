@@ -65,25 +65,22 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="py-xl bg-surface-container-low">
-      <div className="max-w-container-max mx-auto px-gutter md:px-xl">
-        <div className="grid lg:grid-cols-2 gap-xl">
+    <section id="contact" className="bg-surface-container-low py-10 md:py-14">
+      <div className="portfolio-container">
+        <div className="grid gap-8 lg:grid-cols-2 lg:gap-12">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-60px" }}
             transition={{ duration: 0.5 }}
-            className="reveal-on-scroll"
           >
-            <h2 className="font-display-lg text-display-lg-mobile md:text-display-lg mb-md text-on-surface">
-              Let's Build <span className="text-primary">Something Together</span>
-            </h2>
-            <p className="font-body-lg text-body-lg text-on-surface-variant mb-lg max-w-2xl break-words whitespace-normal text-left">
+            <h2 className="portfolio-section-title mb-3">Contact</h2>
+            <p className="mb-6 max-w-prose leading-relaxed text-on-surface-variant">
               Whether you have a project in mind, want to talk ML, or just want to connect, my inbox is always open.
             </p>
 
             {/* Contact Info */}
-            <div className="space-y-md mb-xl">
+            <div className="mb-5 space-y-4">
               <div 
                 className="flex items-center gap-sm cursor-pointer group/item"
                 onClick={() => handleCopy(profile.location, "Location")}
@@ -159,8 +156,7 @@ export default function Contact() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-60px" }}
             transition={{ duration: 0.5, delay: 0.1 }}
-            className="glass-card p-lg rounded-2xl reveal-on-scroll lightning-glow"
-            style={{ transitionDelay: "200ms" }}
+            className="glass-card rounded-2xl p-5 sm:p-7"
           >
             <form onSubmit={handleSubmit} noValidate className="space-y-md">
               <div className="grid md:grid-cols-2 gap-md">

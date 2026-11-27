@@ -25,14 +25,14 @@ export default function CertificationDetail() {
   };
 
   return (
-    <div className="min-h-screen bg-background py-20">
+    <div className="min-h-screen bg-background py-10 md:py-14">
       <CertificateModal
         certification={selectedCert}
         isOpen={!!selectedCert}
         onClose={() => setSelectedCert(null)}
       />
       
-      <div className="max-w-container-max mx-auto px-gutter md:px-xl">
+      <div className="portfolio-container">
         <Link 
           to="/" 
           className="inline-flex items-center gap-xs font-label-md text-primary hover:underline underline-offset-4 mb-8"
@@ -41,7 +41,7 @@ export default function CertificationDetail() {
           Back to Portfolio
         </Link>
         
-        <h1 className="font-display-lg text-display-lg-mobile md:text-display-lg mb-xl text-on-surface">
+        <h1 className="portfolio-section-title mb-6">
           {matchedCategory ? (
             <>{matchedCategory} <span className="text-primary">Certifications</span></>
           ) : (

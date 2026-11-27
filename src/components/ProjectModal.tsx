@@ -1,151 +1,80 @@
-import { useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { ArrowUpRight, X } from "lucide-react";
+import { useEffect, useId, useRef } from "react";
 import type { Project } from "../data/portfolio";
-import StatusDot from "./StatusDot";
 import { isValidHttpUrl } from "../lib/validation";
 
 interface ProjectModalProps {
   project: Project | null;
-  isOpen: boolean;
   onClose: () => void;
 }
 
-export default function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
+export default function ProjectModal({ project, onClose }: ProjectModalProps) {
+  const dialogRef = useRef<HTMLDialogElement>(null);
+  const titleId = useId();
+
   useEffect(() => {
-    if (!isOpen) return;
+    const dialog = dialogRef.current;
+    if (!dialog || !project) return;
 
-    const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") onClose();
-    };
-    const previousOverflow = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
-    window.addEventListener("keydown", handleKeyDown);
-
-    return () => {
-      document.body.style.overflow = previousOverflow;
-      window.removeEventListener("keydown", handleKeyDown);
-    };
-  }, [isOpen, onClose]);
-
-  if (!project) return null;
+    dialog.showModal();
+    return () => dialog.close();
+  }, [project]);
 
   return (
-    <AnimatePresence>
-      {isOpen && (
-        <>
-          {/* Backdrop */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onClick={onClose}
-            aria-hidden="true"
-            className="fixed inset-0 bg-black/40 backdrop-blur-sm z-[60]"
-          />
-
-          {/* Modal Container */}
-          <div className="fixed inset-0 z-[70] flex items-center justify-center p-4 pointer-events-none">
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9, y: 20 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.9, y: 20 }}
-              role="dialog"
-              aria-modal="true"
-              aria-labelledby="project-modal-title"
-              className="w-full max-w-2xl bg-surface-container-lowest border border-outline-variant/30 rounded-3xl overflow-hidden shadow-2xl pointer-events-auto relative max-h-[90vh] flex flex-col lightning-glow"
-            >
-              {/* Close Button */}
-              <button
-                onClick={onClose}
-                aria-label="Close project details"
-                className="absolute top-6 right-6 text-on-surface-variant hover:text-on-surface transition-colors z-10 bg-surface-container-low/80 backdrop-blur-sm p-1.5 rounded-full"
-              >
-                <span className="material-symbols-outlined text-xl">close</span>
-              </button>
-
-              <div className="overflow-y-auto p-8 md:p-12 flex-1">
-                {/* Category & Status */}
-                <div className="flex items-center gap-3 mb-6">
-                  <StatusDot color="primary" />
-                  <span className="text-[10px] font-bold tracking-[0.2em] text-on-surface-variant/70 uppercase">
-                    {project.category || "WEB DEVELOPMENT"}
-                  </span>
-                </div>
-
-                {/* Title */}
-                <h2 id="project-modal-title" className="text-4xl md:text-5xl font-bold text-on-surface mb-6 leading-tight pr-8">
-                  {project.title}
-                </h2>
-
-                {/* Description */}
-                <p className="text-lg text-on-surface-variant leading-relaxed mb-8">
-                  {project.description}
-                </p>
-
-                {/* Action Button */}
-                <div className="flex flex-wrap gap-4 mb-10">
-                  {isValidHttpUrl(project.live) && (
-                    <a
-                      href={project.live}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="inline-flex items-center gap-2 bg-primary text-on-primary px-6 py-3 rounded-xl font-semibold hover:shadow-lg hover:opacity-95 transition-all text-sm"
-                    >
-                      View Live
-                      <span className="material-symbols-outlined text-sm">north_east</span>
-                    </a>
-                  )}
-                  {isValidHttpUrl(project.github) && (
-                    <a
-                      href={project.github}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="inline-flex items-center gap-2 bg-surface-container-high hover:bg-surface-container-highest text-on-surface px-6 py-3 rounded-xl font-semibold border border-outline-variant/30 hover:shadow-md transition-all text-sm"
-                    >
-                      View Code
-                      <span className="material-symbols-outlined text-sm">code</span>
-                    </a>
-                  )}
-                </div>
-
-                {/* Bullets */}
-                <ul className="space-y-4 mb-10">
-                  {(project.bullets || [project.description]).map((bullet, idx) => (
-                    <li key={idx} className="flex gap-3 text-on-surface-variant leading-relaxed text-sm">
-                      <span className="text-primary mt-1.5 flex-shrink-0">
-                        <svg width="8" height="8" viewBox="0 0 8 8" fill="none" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M0 4L6 0V8L0 4Z" fill="currentColor" />
-                        </svg>
-                      </span>
-                      {bullet}
-                    </li>
-                  ))}
-                </ul>
-
-                {/* Highlight Quote */}
-                {project.summary && (
-                  <p className="text-primary font-medium italic mb-10 flex gap-2 items-center text-sm">
-                    <span className="material-symbols-outlined text-base">arrow_right_alt</span>
-                    {project.summary}
-                  </p>
-                )}
-
-                {/* Tech Stack Tags */}
-                <div className="flex flex-wrap gap-2">
-                  {project.stack.map((tech) => (
-                    <span
-                      key={tech}
-                      className="px-4 py-1.5 rounded-full bg-surface-container border border-outline-variant/30 text-on-surface-variant text-xs font-medium"
-                    >
-                      {tech}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            </motion.div>
+    <dialog
+      ref={dialogRef}
+      aria-labelledby={titleId}
+      className="project-dialog"
+      onCancel={(event) => {
+        event.preventDefault();
+        onClose();
+      }}
+      onClick={(event) => {
+        if (event.target === event.currentTarget) onClose();
+      }}
+    >
+      {project && (
+        <div className="p-5 sm:p-8">
+          <div className="flex items-start justify-between gap-3">
+            <div>
+              {project.category && <p className="portfolio-eyebrow">{project.category}</p>}
+              <h2 id={titleId} className="mt-1 font-display-lg text-3xl leading-tight font-bold tracking-tight sm:text-4xl">
+                {project.title}
+              </h2>
+              {project.subtitle && <p className="mt-1 text-base font-bold">{project.subtitle}</p>}
+            </div>
+            <button type="button" className="portfolio-icon-button shrink-0" aria-label="Close project details" onClick={onClose}>
+              <X size={18} aria-hidden="true" />
+            </button>
           </div>
-        </>
+
+          <p className="mt-3 text-on-surface-variant">{project.description}</p>
+          {project.bullets && (
+            <ul className="mt-4 list-disc space-y-2 pl-5 text-sm leading-relaxed text-on-surface-variant marker:text-primary">
+              {project.bullets.map((bullet) => <li key={bullet}>{bullet}</li>)}
+            </ul>
+          )}
+          {project.summary && <p className="mt-4 text-sm font-medium text-primary">{project.summary}</p>}
+          <ul aria-label="Technologies" className="mt-4 flex flex-wrap gap-1.5">
+            {project.stack.map((technology) => <li key={technology} className="portfolio-tag">{technology}</li>)}
+          </ul>
+
+          {(isValidHttpUrl(project.live) || isValidHttpUrl(project.github)) && (
+            <div className="mt-5 flex flex-wrap gap-2.5">
+              {isValidHttpUrl(project.live) && (
+                <a href={project.live} target="_blank" rel="noreferrer" className="portfolio-button bg-primary text-on-primary hover:brightness-110">
+                  View live <ArrowUpRight size={16} aria-hidden="true" />
+                </a>
+              )}
+              {isValidHttpUrl(project.github) && (
+                <a href={project.github} target="_blank" rel="noreferrer" className="portfolio-button portfolio-button-secondary">
+                  View code <ArrowUpRight size={16} aria-hidden="true" />
+                </a>
+              )}
+            </div>
+          )}
+        </div>
       )}
-    </AnimatePresence>
+    </dialog>
   );
 }

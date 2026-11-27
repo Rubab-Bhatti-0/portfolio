@@ -59,7 +59,7 @@ export default function CertificateModal({ certification, isOpen, onClose }: Cer
               role="dialog"
               aria-modal="true"
               aria-labelledby="certificate-modal-title"
-              className="w-full max-w-3xl bg-surface-container-lowest border border-outline-variant/30 rounded-3xl overflow-hidden shadow-2xl pointer-events-auto relative max-h-[90vh] flex flex-col lightning-glow"
+              className="w-full max-w-3xl bg-surface-container-lowest border border-outline-variant rounded-2xl overflow-hidden shadow-2xl pointer-events-auto relative max-h-[90vh] flex flex-col"
             >
               {/* Close Button */}
               <button

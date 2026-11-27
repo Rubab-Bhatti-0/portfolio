@@ -14,42 +14,29 @@ import AllProjects from "./components/AllProjects";
 import { useEffect } from "react";
 
 function ScrollToHashAndTop() {
-  const { pathname, hash } = useLocation();
+  const { key, hash } = useLocation();
   useEffect(() => {
-    let timeoutId: number | undefined;
-
     if (hash) {
-      const element = document.getElementById(hash.substring(1));
-      if (element) {
-        timeoutId = window.setTimeout(() => {
-          element.scrollIntoView({ behavior: "smooth", block: "start" });
-        }, 100);
-      }
+      document.getElementById(hash.slice(1))?.scrollIntoView({ block: "start" });
     } else {
-      window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+      window.scrollTo({ top: 0, left: 0, behavior: "instant" });
     }
-
-    return () => {
-      if (timeoutId !== undefined) window.clearTimeout(timeoutId);
-    };
-  }, [pathname, hash]);
+  }, [key, hash]);
   return null;
 }
 
 function HomePage() {
-  useEffect(() => {
-    // Force visibility on load
-    const reveals = document.querySelectorAll(".reveal-on-scroll");
-    reveals.forEach(el => el.classList.add("active"));
-  }, []);
-
   return (
     <>
       <Hero />
-      <About />
-      <Skills />
-      <Experience />
       <Projects />
+      <div className="border-y border-outline-variant">
+        <div className="portfolio-container grid gap-8 py-9 md:grid-cols-[minmax(0,1fr)_minmax(0,1.25fr)] lg:gap-12">
+          <About />
+          <Experience />
+        </div>
+      </div>
+      <Skills />
       <Certifications />
       <Contact />
     </>

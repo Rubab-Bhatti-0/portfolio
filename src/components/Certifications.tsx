@@ -22,12 +22,10 @@ export default function Certifications() {
   };
 
   return (
-    <section id="certifications" className="py-xl bg-surface-container-lowest">
-      <div className="max-w-container-max mx-auto px-gutter md:px-xl">
-        <h2 className="font-display-lg text-display-lg-mobile md:text-display-lg mb-xl text-center reveal-on-scroll text-on-surface">
-          Professional <span className="text-primary">Certifications</span>
-        </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-md reveal-on-scroll">
+    <section id="certifications" className="border-y border-outline-variant py-10 md:py-14">
+      <div className="portfolio-container">
+        <h2 className="portfolio-section-title mb-5">Certifications</h2>
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {categories.map((category, i) => (
             <motion.div
               key={category}
@@ -38,10 +36,10 @@ export default function Certifications() {
             >
               <Link
                 to={`/certifications/${slugify(category)}`}
-                className="glass-card p-lg rounded-2xl flex flex-col items-center text-center gap-md border border-outline-variant/30 hover:shadow-lg hover:border-primary/50 transition-all group h-full"
+                className="portfolio-card group flex h-full flex-col items-start gap-3 rounded-2xl p-5"
               >
-                <div className="w-16 h-16 rounded-full bg-primary/10 text-primary flex items-center justify-center shrink-0 group-hover:bg-primary/20 transition-colors mb-2">
-                  <span className="material-symbols-outlined text-3xl">{getCategoryIcon(category)}</span>
+                <div className="grid size-10 shrink-0 place-items-center rounded-xl bg-surface-container text-primary">
+                  <span className="material-symbols-outlined text-xl" aria-hidden="true">{getCategoryIcon(category)}</span>
                 </div>
                 <div>
                   <h3 className="font-headline-md text-xl font-bold text-on-surface group-hover:text-primary transition-colors">
@@ -51,8 +49,8 @@ export default function Certifications() {
                     {getCount(category)} {getCount(category) === 1 ? 'Certification' : 'Certifications'}
                   </p>
                 </div>
-                <div className="mt-auto pt-4 text-primary font-label-sm uppercase tracking-widest group-hover:translate-x-1 transition-transform flex items-center gap-1">
-                  View All <span className="material-symbols-outlined text-sm">arrow_forward</span>
+                <div className="mt-auto flex items-center gap-1 pt-1 text-sm font-bold text-primary">
+                  View certificates <span className="material-symbols-outlined text-sm" aria-hidden="true">arrow_forward</span>
                 </div>
               </Link>
             </motion.div>

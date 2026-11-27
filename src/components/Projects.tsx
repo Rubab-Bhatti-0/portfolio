@@ -1,116 +1,29 @@
-import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
+import { ArrowRight } from "lucide-react";
 import { useState } from "react";
-import { projects, type Status } from "../data/portfolio";
-import type { Project } from "../data/portfolio";
+import { Link } from "react-router-dom";
+import { projects, type Project } from "../data/portfolio";
+import ProjectCard from "./ProjectCard";
 import ProjectModal from "./ProjectModal";
 
-const statusStyle: Record<Status, string> = {
-  live: "text-primary border-primary/40",
-  internal: "text-amber-500 border-amber-500/40",
-  archived: "text-on-surface-variant border-outline-variant",
-};
+const selectedProjects = projects.filter((project) => project.featured).slice(0, 3);
 
 export default function Projects() {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
-  const featured = projects.filter((p) => p.featured);
-  const displayedProjects = featured.slice(0, 4);
 
   return (
-    <section id="projects" className="mx-auto max-w-container-max px-gutter md:px-xl py-xl">
-      <ProjectModal
-        project={selectedProject}
-        isOpen={!!selectedProject}
-        onClose={() => setSelectedProject(null)}
-      />
-      <div className="mb-xl">
-        <h2 className="font-display-lg text-display-lg-mobile md:text-display-lg text-on-surface mb-md reveal-on-scroll">
-          Featured <span className="text-primary">Projects</span>
-        </h2>
-      </div>
-
-      {/* Featured Projects Vertical Stack */}
-      <div className="flex flex-col gap-6 mb-xl reveal-on-scroll">
-        {displayedProjects.map((p, i) => (
-          <motion.div
-            key={p.title}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-60px" }}
-            transition={{ duration: 0.45, delay: i * 0.06 }}
-            className="group bg-surface-container-lowest rounded-2xl p-6 md:p-8 border border-outline-variant/30 hover:shadow-[0_0_30px_rgba(53,37,205,0.08)] hover:border-primary/40 hover:-translate-y-0.5 transition-all cursor-pointer relative"
-            style={{ transitionDelay: `${i * 100}ms` }}
-            onClick={() => setSelectedProject(p)}
-          >
-            <div className="flex flex-col justify-between h-full">
-              <div>
-                {/* Featured Badge */}
-                <div className="flex items-center gap-2 mb-3">
-                  <span className="w-2 h-2 rounded-full bg-primary shrink-0 animate-pulse" />
-                  <span className="text-xs font-bold tracking-widest text-primary uppercase">
-                    Featured
-                  </span>
-                </div>
-
-                {/* Header row with Title & Status */}
-                <div className="flex justify-between items-start gap-4 mb-4">
-                  <h3 className="font-headline-md text-2xl md:text-3xl text-on-surface group-hover:text-primary transition-colors leading-tight">
-                    {p.title}
-                  </h3>
-                  <span
-                    className={`text-xs font-label-sm border rounded-full px-3 py-1 uppercase tracking-wider shrink-0 ${statusStyle[p.status]}`}
-                  >
-                    {p.status}
-                  </span>
-                </div>
-
-                {/* Description */}
-                <p className="text-on-surface-variant mb-4 text-body-md leading-relaxed">
-                  {p.description}
-                </p>
-
-                {/* Summary / Tagline Arrow */}
-                {p.summary && (
-                  <p className="text-primary font-medium mb-6 text-body-md flex items-start gap-2">
-                    <span className="shrink-0 font-bold select-none">→</span>
-                    <span>{p.summary}</span>
-                  </p>
-                )}
-              </div>
-
-              {/* Bottom Row: Tech Stack Tags & View details button */}
-              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mt-2">
-                <div className="flex flex-wrap gap-2">
-                  {p.stack.map((tech) => (
-                    <span
-                      key={tech}
-                      className="text-xs font-label-sm bg-surface-container/60 border border-outline-variant/20 px-3 py-1.5 rounded-full text-on-surface-variant font-medium hover:bg-surface-container transition-colors"
-                    >
-                      {tech}
-                    </span>
-                  ))}
-                </div>
-
-                <div className="flex items-center gap-xs text-primary font-label-md shrink-0 group-hover:gap-sm transition-all self-end sm:self-auto">
-                  View Details
-                  <span className="material-symbols-outlined text-sm">arrow_forward</span>
-                </div>
-              </div>
-            </div>
-          </motion.div>
-        ))}
-      </div>
-
-      {/* View All Projects Button */}
-      <div className="mt-xl text-center reveal-on-scroll">
-        <Link
-          to="/projects"
-          className="inline-flex items-center gap-xs font-label-md text-primary hover:underline underline-offset-4 bg-primary/10 px-6 py-3 rounded-full hover:bg-primary/20 transition-colors"
-        >
-          View All Projects
-          <span className="material-symbols-outlined text-sm">arrow_forward</span>
+    <section id="projects" aria-labelledby="projects-title" className="portfolio-container pb-10 md:pb-12">
+      <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-1 border-t border-outline-variant pt-5 pb-3">
+        <h2 id="projects-title" className="portfolio-section-title">Selected projects</h2>
+        <Link to="/projects" className="portfolio-text-link">
+          All projects <ArrowRight size={15} aria-hidden="true" />
         </Link>
       </div>
+      <div className="grid gap-3.5 md:grid-cols-2">
+        {selectedProjects.map((project) => (
+          <ProjectCard key={project.title} project={project} onOpen={setSelectedProject} />
+        ))}
+      </div>
+      <ProjectModal project={selectedProject} onClose={() => setSelectedProject(null)} />
     </section>
   );
 }
